@@ -40,7 +40,7 @@ export default function Hero() {
       >
         <div className="relative w-full md:w-[60%] h-full opacity-35 md:opacity-100">
           <Image
-            src="/mark_portrait.png"
+            src="/Portfolio/mark_portrait.png"
             alt="Mark Alexis Batis Portrait Background"
             fill
             priority
@@ -67,7 +67,7 @@ export default function Hero() {
         {/* Mobile Viewport Portrait - Displayed at the top, outside the card */}
         <div className="block md:hidden w-[80%] mx-auto aspect-[4/5] relative rounded-3xl overflow-hidden z-0">
           <Image
-            src="/mark_portrait.png"
+            src="/Portfolio/mark_portrait.png"
             alt="Mark Alexis Batis"
             fill
             priority
