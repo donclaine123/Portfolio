@@ -1,12 +1,57 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { ArrowDown, ArrowRight } from "lucide-react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function Hero() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
 
+  const yParallax = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
+  const opacityFade = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    
+    const ctx = gsap.context(() => {
+      // Magnetic button effect for CTA
+      const magneticBtns = document.querySelectorAll('.magnetic-btn');
+      
+      magneticBtns.forEach((btn: any) => {
+        btn.addEventListener('mousemove', (e: MouseEvent) => {
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          
+          gsap.to(btn, {
+            x: x * 0.3,
+            y: y * 0.3,
+            duration: 0.4,
+            ease: "power2.out"
+          });
+        });
+        
+        btn.addEventListener('mouseleave', () => {
+          gsap.to(btn, {
+            x: 0,
+            y: 0,
+            duration: 0.7,
+            ease: "elastic.out(1, 0.3)"
+          });
+        });
+      });
+    }, containerRef);
+    
+    return () => ctx.revert();
+  }, []);
 
   const stats = [
     {
@@ -29,128 +74,120 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex flex-col justify-between overflow-hidden bg-[#FAF8F5] pt-28"
+      ref={containerRef}
+      className="relative min-h-[110vh] flex flex-col justify-between overflow-hidden bg-[#FAF8F5] pt-20 lg:pt-32"
     >
-      {/* Background image container - Left aligned for desktop */}
+      {/* Background image container - Parallax cinematic */}
       <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, ease: "easeOut", delay: 1.2 }}
-        className="absolute top-0 bottom-[200px] left-0 right-0 z-0 hidden md:flex items-end justify-start max-w-7xl mx-auto w-full pointer-events-none hero-portrait-container"
+        style={{ y: yParallax, opacity: opacityFade }}
+        className="absolute top-0 left-0 right-0 h-[120vh] w-full z-0 pointer-events-none"
       >
-        <div className="relative w-full md:w-[60%] h-full opacity-35 md:opacity-100">
+        <div className="absolute top-10 lg:top-12 right-0 lg:-right-[5%] w-full lg:w-[65%] h-full opacity-40 lg:opacity-80">
           <Image
             src="/Portfolio/mark_portrait.png"
-            alt="Mark Alexis Batis Portrait Background"
+            alt="Mark Alexis Batis Portrait"
             fill
             priority
-            className="object-contain object-bottom md:object-left-bottom filter grayscale contrast-[1.1] brightness-[1.03]"
+            className="object-cover object-top lg:object-contain lg:object-right-top filter grayscale contrast-[1.15] brightness-[1.05]"
           />
-          {/* Subtle gradient to fade the image on the right on desktop */}
-          <div className="hidden md:block absolute inset-y-0 right-0 w-1/3 bg-gradient-to-r from-transparent to-[#FAF8F5]" />
+          {/* Gradients to blend the image perfectly */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#FAF8F5] via-[#FAF8F5]/40 to-transparent lg:h-[80%]" />
+          <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-[#FAF8F5] via-[#FAF8F5]/80 to-transparent hidden lg:block" />
         </div>
       </motion.div>
 
-      {/* Floating Background Typography */}
+      {/* Floating Background Typography (Oversized) */}
       <motion.div 
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.2, ease: "easeOut", delay: 1.4 }}
-        className="absolute top-[18%] right-[10%] text-[24vw] font-serif font-black text-sand-200/30 select-none pointer-events-none z-0 hero-floating-m hidden md:block"
+        initial={{ opacity: 0, y: 100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+        className="absolute top-1/4 -left-[5%] text-[30vw] font-serif font-black text-sand-200/40 select-none pointer-events-none z-0 tracking-tighter"
       >
-        M
+        MB.
       </motion.div>
 
-      {/* Hero Content */}
-      <div className="max-w-6xl mx-auto w-full px-6 flex-1 flex flex-col md:flex-row md:items-center md:justify-end relative z-10 py-16 md:py-24">
+      {/* Hero Content - Asymmetrical Editorial Layout */}
+      <div className="max-w-[1400px] mx-auto w-full px-6 lg:px-12 flex-1 flex flex-col relative z-10 pt-10 lg:pt-20">
         
-        {/* Mobile Viewport Portrait - Displayed at the top, outside the card */}
-        <div className="block md:hidden w-[80%] mx-auto aspect-[4/5] relative rounded-3xl overflow-hidden z-0">
-          <Image
-            src="/Portfolio/mark_portrait.png"
-            alt="Mark Alexis Batis"
-            fill
-            priority
-            className="object-cover object-center filter grayscale contrast-[1.1] brightness-[1.03]"
-          />
-        </div>
-
-        <div className="w-full md:w-[50%] text-left bg-[#FAF8F5]/80 md:bg-transparent backdrop-blur-md md:backdrop-blur-none p-8 md:p-0 rounded-3xl border border-sand-200/50 md:border-none hero-text-card relative z-10 mt-[-160px] md:mt-0">
+        <div className="w-full flex flex-col lg:flex-row justify-between items-start lg:items-end gap-12 lg:gap-0 mt-8 lg:mt-24">
           
-          {/* Details slide down from top */}
+          {/* Main Typography Block */}
           <motion.div
-            initial={{ y: -40, opacity: 0 }}
+            initial={{ y: 60, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1], delay: 1.2 }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
+            className="w-full lg:w-[65%] text-left"
           >
-            <div className="flex items-center gap-2 mb-6">
-              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-burgundy-700 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-burgundy-700" />
+            <div className="flex items-center gap-3 mb-8 lg:mb-12">
+              <div className="h-[1px] w-12 bg-burgundy-700" />
+              <span className="text-[9px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-burgundy-700">
                 AVAILABLE FOR OPPORTUNITIES
               </span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl lg:text-[84px] font-serif font-black tracking-tight text-stone-900 leading-[0.95] mb-8">
-              Aspiring <br />
-              <span className="text-burgundy-700 italic font-normal">Software</span> <br />
-              Developer
+            <h1 className="text-[16vw] lg:text-[9vw] font-serif font-black tracking-tighter text-stone-900 leading-[0.85] mb-6">
+              Aspiring<br />
+              <span className="text-burgundy-700 italic font-normal inline-block ml-[8vw] lg:ml-[4vw]">Software</span><br />
+              Developer<span className="text-burgundy-700">.</span>
             </h1>
+          </motion.div>
 
-            <p className="text-base md:text-lg text-stone-600 leading-relaxed mb-10 max-w-lg font-medium">
+          {/* Description & CTA block - offset to the right */}
+          <motion.div 
+            initial={{ y: 40, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 1.2 }}
+            className="w-full lg:w-[35%] flex flex-col items-start lg:pl-10 pb-10 lg:pb-0"
+          >
+            <p className="text-base lg:text-[1.1rem] text-stone-600 leading-[1.8] mb-10 font-medium">
               I am a recent Computer Science graduate specializing in building full-stack web architectures, configuring databases, and optimizing IT operations. Eager to solve real-world system bottlenecks.
             </p>
+
+            <div className="flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto">
+              <a
+                href="#projects"
+                className="magnetic-btn px-8 py-4.5 rounded-full bg-burgundy-700 text-[#FAF8F5] hover:bg-burgundy-800 text-[10px] font-bold uppercase tracking-[0.2em] transition-colors duration-300 flex items-center justify-center gap-3 w-full sm:w-auto shadow-xl shadow-burgundy-700/20"
+              >
+                My Projects
+                <ArrowDown className="h-4 w-4" />
+              </a>
+              <a
+                href="#contact"
+                className="magnetic-btn px-8 py-4.5 rounded-full bg-transparent border border-sand-300 hover:border-burgundy-700 text-stone-800 hover:text-burgundy-700 text-[10px] font-bold uppercase tracking-[0.2em] transition-colors duration-300 flex items-center justify-center gap-3 w-full sm:w-auto"
+              >
+                Get in touch
+                <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
           </motion.div>
 
-          {/* CTA buttons slide up from bottom */}
-          <motion.div 
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1], delay: 1.3 }}
-            className="flex flex-wrap items-center gap-4"
-          >
-            <motion.a
-              href="#projects"
-              whileHover={{ scale: 1.03, y: -2 }}
-              whileTap={{ scale: 0.98 }}
-              className="px-8 py-4 rounded-full bg-burgundy-700 text-[#FAF8F5] hover:bg-burgundy-600 text-[10px] font-bold uppercase tracking-[0.2em] transition-[background-color,box-shadow] duration-200 flex items-center gap-2.5 group cursor-pointer shadow-sm"
-            >
-              My Projects
-              <ArrowDown className="h-3.5 w-3.5 group-hover:translate-y-0.5 transition-transform" />
-            </motion.a>
-            <motion.a
-              href="#contact"
-              whileHover={{ scale: 1.03, y: -2 }}
-              whileTap={{ scale: 0.98 }}
-              className="px-8 py-4 rounded-full border border-sand-300 hover:border-burgundy-700 bg-transparent text-burgundy-700 text-[10px] font-bold uppercase tracking-[0.2em] transition-[border-color,background-color] duration-200 flex items-center gap-2.5 cursor-pointer"
-            >
-              Get in touch
-              <ArrowRight className="h-3.5 w-3.5" />
-            </motion.a>
-          </motion.div>
         </div>
       </div>
 
-      {/* Stats Board at the bottom - slides up from below */}
+      {/* Stats Board at the bottom - Cinematic overlay style */}
       <motion.div 
-        initial={{ y: 50, opacity: 0 }}
+        initial={{ y: 40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1], delay: 1.4 }}
-        className="w-full bg-[#FAF8F5] border-t border-sand-200/80 py-10 relative z-20"
+        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 1.5 }}
+        className="w-full relative z-20 mt-10 lg:mt-32 pb-12 lg:pb-16"
       >
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 md:divide-x md:divide-sand-200">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          <div className="border-t border-sand-200/80 pt-8 lg:pt-12 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 lg:divide-x lg:divide-sand-200">
             {stats.map((stat, idx) => (
               <div
                 key={idx}
-                className="flex flex-col pt-4 md:pt-0 md:pl-8 first:pl-0 first:pt-0"
+                className="flex flex-col lg:px-10 first:pl-0 last:pr-0 group cursor-default"
               >
-                <span className="text-4xl md:text-5xl font-serif font-black text-burgundy-700 tracking-tight mb-2">
-                  {stat.value}
-                </span>
-                <span className="text-[10px] font-bold tracking-[0.2em] text-stone-900 mb-2 uppercase">
+                <div className="overflow-hidden mb-3">
+                  <span className="inline-block text-4xl lg:text-6xl font-serif font-black text-stone-900 tracking-tighter group-hover:text-burgundy-700 transition-colors duration-500">
+                    {stat.value}
+                  </span>
+                </div>
+                <div className="h-[1px] w-full bg-sand-200 mb-4 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                <span className="text-[9px] lg:text-[10px] font-bold tracking-[0.25em] text-burgundy-700 mb-3 uppercase">
                   {stat.label}
                 </span>
-                <span className="text-xs text-stone-500 leading-relaxed max-w-sm">
+                <span className="text-xs lg:text-sm text-stone-500 leading-[1.7] max-w-[280px]">
                   {stat.desc}
                 </span>
               </div>
