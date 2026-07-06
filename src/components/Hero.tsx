@@ -80,19 +80,19 @@ export default function Hero() {
       {/* Background image container - Parallax cinematic */}
       <motion.div 
         style={{ y: yParallax, opacity: opacityFade }}
-        className="absolute top-0 left-0 right-0 h-[120vh] w-full z-0 pointer-events-none"
+        className="absolute top-0 right-0 w-full lg:w-[60%] h-[110vh] z-0 pointer-events-none flex justify-end"
       >
-        <div className="absolute top-10 lg:top-12 right-0 lg:-right-[5%] w-full lg:w-[65%] h-full opacity-40 lg:opacity-80">
+        <div className="relative top-10 lg:top-14 right-0 lg:-right-[2%] w-[90%] sm:w-[75%] lg:w-[90%] max-w-[620px] h-[75vh] lg:h-[90vh] opacity-45 lg:opacity-75">
           <Image
-            src="/Portfolio/mark_portrait.png"
+            src="/Portfolio/mark.png"
             alt="Mark Alexis Batis Portrait"
             fill
             priority
-            className="object-cover object-top lg:object-contain lg:object-right-top filter grayscale contrast-[1.15] brightness-[1.05]"
+            className="object-contain object-top lg:object-right-top filter grayscale contrast-[1.12] brightness-[1.03]"
           />
-          {/* Gradients to blend the image perfectly */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#FAF8F5] via-[#FAF8F5]/40 to-transparent lg:h-[80%]" />
-          <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-[#FAF8F5] via-[#FAF8F5]/80 to-transparent hidden lg:block" />
+          {/* Soft gradient mask to blend bottom and left edges */}
+          <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#FAF8F5] via-[#FAF8F5]/60 to-transparent" />
+          <div className="absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-[#FAF8F5] to-transparent hidden lg:block" />
         </div>
       </motion.div>
 

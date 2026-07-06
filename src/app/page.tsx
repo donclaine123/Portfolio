@@ -21,18 +21,6 @@ export default function Home() {
         <Skills />         {/* Leadership Philosophy */}
         <Contact />        {/* Contact Form */}
       </main>
-
-      {/* Clean editorial footer */}
-      <footer className="py-12 border-t border-sand-200 text-center px-6 relative z-10 bg-[#FAF8F5]">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-semibold text-stone-500">
-          <span>
-            &copy; {new Date().getFullYear()} Mark Alexis Batis. All rights reserved.
-          </span>
-          <span className="flex items-center gap-1.5 uppercase tracking-wider text-[10px] text-stone-400">
-            Versatile Software Development & IT Operations. Built with Next.js & Tailwind.
-          </span>
-        </div>
-      </footer>
     </>
   );
 }
