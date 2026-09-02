@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://donclaine123.github.io/Portfolio/sitemap.xml
+Sitemap: https://markalexisbatis.vercel.app/sitemap.xml

@@ -24,7 +24,7 @@ const caveat = Caveat({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://donclaine123.github.io/Portfolio"),
+  metadataBase: new URL("https://markalexisbatis.vercel.app"),
   title: {
     default: "Mark Alexis Batis | Full Stack Developer & Software Engineer",
     template: "%s | Mark Alexis Batis",
@@ -47,12 +47,12 @@ export const metadata: Metadata = {
   creator: "Mark Alexis Batis",
   publisher: "Mark Alexis Batis",
   alternates: {
-    canonical: "https://donclaine123.github.io/Portfolio",
+    canonical: "https://markalexisbatis.vercel.app",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://donclaine123.github.io/Portfolio",
+    url: "https://markalexisbatis.vercel.app",
     title: "Mark Alexis Batis | Full Stack Developer & Software Engineer",
     description:
       "Explore projects, technical skills, and experience of Mark Alexis Batis — Full Stack Developer & Computer Science Graduate.",
@@ -98,8 +98,8 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Mark Alexis Batis",
-  url: "https://donclaine123.github.io/Portfolio",
-  image: "https://donclaine123.github.io/Portfolio/mark.png",
+  url: "https://markalexisbatis.vercel.app",
+  image: "https://markalexisbatis.vercel.app/mark.png",
   jobTitle: "Full Stack Developer",
   worksFor: {
     "@type": "Organization",

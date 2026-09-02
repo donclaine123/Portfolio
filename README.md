@@ -6,7 +6,7 @@ Welcome to the repository of my personal portfolio website! This project showcas
 
 This is a modern, highly interactive, and performant web application built to serve as my digital presence. It features smooth scrolling, dynamic scroll-based animations, and a clean, minimalist aesthetic with a focus on typography and whitespace.
 
-**Live Site:** [Insert live URL here]
+**Live Site:** [https://markalexisbatis.vercel.app](https://markalexisbatis.vercel.app)
 
 ## 🛠️ Tech Stack
 

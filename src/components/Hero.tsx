@@ -51,7 +51,7 @@ export default function Hero() {
     <section
       id="home"
       ref={containerRef}
-      className="relative min-h-[100svh] flex flex-col items-center justify-center overflow-hidden bg-white pt-24 sm:pt-28 md:pt-20 pb-16 px-4"
+      className="relative min-h-[100svh] flex flex-col items-center justify-center overflow-hidden bg-white pt-28 sm:pt-32 md:pt-32 pb-16 px-4"
     >
       {/* Hero Content */}
       <div className="relative z-10 flex flex-col items-center text-center max-w-4xl mx-auto">
