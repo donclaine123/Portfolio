@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     siteName: "Mark Alexis Batis Portfolio",
     images: [
       {
-        url: "/Portfolio/mark.png",
+        url: "/mark.png",
         width: 800,
         height: 800,
         alt: "Mark Alexis Batis",
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     title: "Mark Alexis Batis | Full Stack Developer & Software Engineer",
     description:
       "Explore projects, technical skills, and experience of Mark Alexis Batis — Full Stack Developer & Computer Science Graduate.",
-    images: ["/Portfolio/mark.png"],
+    images: ["/mark.png"],
   },
   robots: {
     index: true,
@@ -85,9 +85,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/Portfolio/mark.png",
-    shortcut: "/Portfolio/mark.png",
-    apple: "/Portfolio/mark.png",
+    icon: "/mark.png",
+    shortcut: "/mark.png",
+    apple: "/mark.png",
   },
   verification: {
     google: "googled537ecc9db18c5e4",

@@ -32,7 +32,7 @@ export default function Projects() {
       timeline: "2025 - 2026",
       industry: "Real-time Monitoring",
       description: "Faculty attendance tracking was a manual, paper-based bottleneck. I engineered a real-time QR Code ecosystem that transformed the workflow into a secure, instant monitoring system.",
-      image: "/Portfolio/facultyattendance.png",
+      image: "/facultyattendance.png",
       status: "available",
       detailsLink: "https://employeeattendance.me",
       metrics: [
@@ -49,7 +49,7 @@ export default function Projects() {
       timeline: "2024 - 2025",
       industry: "Web Application",
       description: "Developed 'EazyAttend'—a full-stack web application designed to automate presence verification via a scan. Constructed a robust security layer implementing encrypted session-based authentication.",
-      image: "/Portfolio/studentattendance.png",
+      image: "/studentattendance.png",
       status: "available",
       detailsLink: "https://eazyattend.netlify.app/",
       metrics: [
