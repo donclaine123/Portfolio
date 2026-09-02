@@ -7,7 +7,8 @@ import { Download, Maximize, X, FileText, Sparkles, Lightbulb, Users, TrendingUp
 
 export default function About() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const pdfUrl = "/developer-resume.pdf";
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+  const pdfUrl = `${basePath}/developer-resume.pdf`;
 
   const coreFoundations = [
     {
