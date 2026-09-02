@@ -89,6 +89,9 @@ export const metadata: Metadata = {
     shortcut: "/Portfolio/mark.png",
     apple: "/Portfolio/mark.png",
   },
+  verification: {
+    google: "googled537ecc9db18c5e4",
+  },
 };
 
 const jsonLd = {
