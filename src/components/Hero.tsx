@@ -47,6 +47,8 @@ export default function Hero() {
     }
   };
 
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
   return (
     <section
       id="home"
@@ -102,7 +104,7 @@ export default function Hero() {
           className="relative w-48 h-60 sm:w-56 sm:h-72 md:w-64 md:h-80 rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden shadow-2xl mb-8 bg-white"
         >
           <Image
-            src="/mark.png"
+            src={`${basePath}/mark.png`}
             alt="Mark Alexis Batis"
             fill
             priority

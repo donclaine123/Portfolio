@@ -24,6 +24,8 @@ interface CaseStudy {
 }
 
 export default function Projects() {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
   const caseStudies: CaseStudy[] = [
     {
       title: "QR Code Attendance & Monitoring System",
@@ -32,7 +34,7 @@ export default function Projects() {
       timeline: "2025 - 2026",
       industry: "Real-time Monitoring",
       description: "Faculty attendance tracking was a manual, paper-based bottleneck. I engineered a real-time QR Code ecosystem that transformed the workflow into a secure, instant monitoring system.",
-      image: "/facultyattendance.png",
+      image: `${basePath}/facultyattendance.png`,
       status: "available",
       detailsLink: "https://employeeattendance.me",
       metrics: [
@@ -49,7 +51,7 @@ export default function Projects() {
       timeline: "2024 - 2025",
       industry: "Web Application",
       description: "Developed 'EazyAttend'—a full-stack web application designed to automate presence verification via a scan. Constructed a robust security layer implementing encrypted session-based authentication.",
-      image: "/studentattendance.png",
+      image: `${basePath}/studentattendance.png`,
       status: "available",
       detailsLink: "https://eazyattend.netlify.app/",
       metrics: [
