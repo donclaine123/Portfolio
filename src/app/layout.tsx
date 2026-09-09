@@ -92,40 +92,95 @@ export const metadata: Metadata = {
   verification: {
     google: "google5bcf944fd2d85eac",
   },
+  other: {
+    "geo.region": "PH-00",
+    "geo.placename": "Caloocan, Metro Manila, Philippines",
+    "geo.position": "14.6534;120.9788",
+    "ICBM": "14.6534, 120.9788",
+  },
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Mark Alexis Batis",
-  url: "https://markalexisbatis.vercel.app",
-  image: "https://markalexisbatis.vercel.app/mark.png",
-  jobTitle: "Full Stack Developer",
-  worksFor: {
-    "@type": "Organization",
-    name: "Independent",
-  },
-  alumniOf: {
-    "@type": "EducationalOrganization",
-    name: "St. Clare College of Caloocan",
-  },
-  sameAs: [
-    "https://github.com/donclaine123",
-    "https://www.linkedin.com/in/mark-alexis-batis-4061b128a/",
-    "https://www.facebook.com/micky.arkal/",
-  ],
-  knowsAbout: [
-    "Web Development",
-    "Full Stack Development",
-    "React",
-    "Next.js",
-    "TypeScript",
-    "JavaScript",
-    "Node.js",
-    "Express.js",
-    "PostgreSQL",
-    "MySQL",
-    "Socket.IO",
+  "@graph": [
+    {
+      "@type": "ProfilePage",
+      "@id": "https://markalexisbatis.vercel.app/#webpage",
+      url: "https://markalexisbatis.vercel.app",
+      name: "Mark Alexis Batis | Full Stack Developer & Software Engineer",
+      description:
+        "Official portfolio and project case studies of Mark Alexis Batis — Full Stack Developer & Computer Science Graduate.",
+      mainEntity: {
+        "@id": "https://markalexisbatis.vercel.app/#person",
+      },
+    },
+    {
+      "@type": "Person",
+      "@id": "https://markalexisbatis.vercel.app/#person",
+      name: "Mark Alexis Batis",
+      alternateName: ["donclaine123", "Alexis Batis"],
+      url: "https://markalexisbatis.vercel.app",
+      image: "https://markalexisbatis.vercel.app/mark.png",
+      jobTitle: "Full Stack Developer",
+      worksFor: {
+        "@type": "Organization",
+        name: "Independent",
+      },
+      alumniOf: {
+        "@type": "EducationalOrganization",
+        name: "St. Clare College of Caloocan",
+      },
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Caloocan",
+        addressRegion: "Metro Manila",
+        addressCountry: "PH",
+      },
+      sameAs: [
+        "https://github.com/donclaine123",
+        "https://www.linkedin.com/in/mark-alexis-batis-4061b128a/",
+        "https://www.facebook.com/micky.arkal/",
+      ],
+      knowsAbout: [
+        "Web Development",
+        "Full Stack Development",
+        "React",
+        "Next.js",
+        "TypeScript",
+        "JavaScript",
+        "Node.js",
+        "Express.js",
+        "PostgreSQL",
+        "MySQL",
+        "Socket.IO",
+        "REST APIs",
+        "System Architecture",
+      ],
+    },
+    {
+      "@type": "SoftwareApplication",
+      name: "QR Code Attendance & Monitoring System",
+      operatingSystem: "Web",
+      applicationCategory: "BusinessApplication",
+      description:
+        "Real-time faculty attendance tracking ecosystem powered by Socket.IO, Node.js, and PostgreSQL.",
+      url: "https://employeeattendance.me",
+      author: {
+        "@id": "https://markalexisbatis.vercel.app/#person",
+      },
+    },
+    {
+      "@type": "SoftwareApplication",
+      name: "EazyAttend Student Attendance System",
+      operatingSystem: "Web",
+      applicationCategory: "EducationalApplication",
+      description:
+        "Automated student presence verification web application with encrypted session-based authentication.",
+      url: "https://eazyattend.netlify.app/",
+      author: {
+        "@id": "https://markalexisbatis.vercel.app/#person",
+      },
+    },
   ],
 };
 
