@@ -105,6 +105,10 @@ const jsonLd = {
     "@type": "Organization",
     name: "Independent",
   },
+  alumniOf: {
+    "@type": "EducationalOrganization",
+    name: "St. Clare College of Caloocan",
+  },
   sameAs: [
     "https://github.com/donclaine123",
     "https://www.linkedin.com/in/mark-alexis-batis-4061b128a/",

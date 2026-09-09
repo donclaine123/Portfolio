@@ -66,7 +66,7 @@ export default function Hero() {
           Hi, I'm
         </motion.span>
 
-        <motion.h2
+        <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
@@ -74,7 +74,7 @@ export default function Hero() {
           className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-black tracking-wider mb-3 px-2"
         >
           MARK ALEXIS BATIS
-        </motion.h2>
+        </motion.h1>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}

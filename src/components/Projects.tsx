@@ -249,7 +249,7 @@ export default function Projects() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-md p-3 sm:p-6 md:p-10 overscroll-contain"
+              className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-md p-2.5 sm:p-4 md:p-10 overscroll-contain"
               onClick={() => setSelectedProject(null)}
             >
               <motion.div
@@ -261,15 +261,15 @@ export default function Projects() {
                 onClick={(e) => e.stopPropagation()}
                 onWheel={(e) => e.stopPropagation()}
                 onTouchMove={(e) => e.stopPropagation()}
-                className="bg-white rounded-[2rem] overflow-hidden w-full max-w-5xl lg:max-w-6xl h-[92vh] md:h-[86vh] flex flex-col shadow-2xl border border-gray-100 overscroll-contain"
+                className="bg-white rounded-2xl sm:rounded-[2rem] overflow-hidden w-full max-w-5xl lg:max-w-6xl h-[94vh] md:h-[86vh] flex flex-col shadow-2xl border border-gray-100 overscroll-contain"
               >
                 {/* Modal Top Bar */}
-                <div className="flex items-center justify-between px-6 sm:px-8 py-4 sm:py-5 border-b border-gray-100 bg-white shrink-0">
-                  <div className="flex flex-col min-w-0 pr-4">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-gray-400">
+                <div className="flex items-center justify-between px-4 sm:px-6 md:px-8 py-3.5 sm:py-5 border-b border-gray-100 bg-white shrink-0">
+                  <div className="flex flex-col min-w-0 pr-3 sm:pr-4">
+                    <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-gray-400">
                       Project Case Study
                     </span>
-                    <h3 className="font-bold text-lg sm:text-xl md:text-2xl text-black truncate">
+                    <h3 className="font-bold text-base sm:text-xl md:text-2xl text-black truncate">
                       {selectedProject.title}
                     </h3>
                   </div>
@@ -280,7 +280,7 @@ export default function Projects() {
                         href={selectedProject.detailsLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-4 py-2 bg-black text-white rounded-full text-xs sm:text-sm font-semibold hover:bg-gray-800 transition-colors shadow-sm"
+                        className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 bg-black text-white rounded-full text-xs sm:text-sm font-semibold hover:bg-gray-800 transition-colors shadow-sm"
                       >
                         <span>Live Site</span>
                         <ExternalLink className="w-3.5 h-3.5" />
@@ -289,24 +289,24 @@ export default function Projects() {
                     <button
                       onClick={() => setSelectedProject(null)}
                       aria-label="Close project details"
-                      className="p-2 text-gray-400 hover:text-black hover:bg-gray-100 rounded-full transition-colors cursor-pointer"
+                      className="p-1.5 sm:p-2 text-gray-400 hover:text-black hover:bg-gray-100 rounded-full transition-colors cursor-pointer"
                     >
                       <X className="w-5 h-5" />
                     </button>
                   </div>
                 </div>
 
-                {/* Modal Two-Column Body: Picture on Left, Information on Right */}
-                <div className="flex-1 grid grid-cols-1 md:grid-cols-12 overflow-y-auto md:overflow-hidden min-h-0 h-full">
+                {/* Modal Body: Flex column on mobile (stacked naturally), Flex row on desktop */}
+                <div className="flex-1 flex flex-col md:flex-row overflow-y-auto md:overflow-hidden min-h-0 h-full">
                   {/* LEFT COLUMN: Picture, Meta & Quick Links */}
                   <div 
                     data-lenis-prevent
-                    className="md:col-span-5 flex flex-col gap-5 p-5 sm:p-6 md:p-8 bg-gray-50/70 border-b md:border-b-0 md:border-r border-gray-100 md:overflow-y-auto min-h-0 md:h-full overscroll-contain"
+                    className="w-full md:w-[42%] lg:w-[40%] flex flex-col gap-4 sm:gap-5 p-4 sm:p-6 md:p-8 bg-gray-50/70 border-b md:border-b-0 md:border-r border-gray-100 md:overflow-y-auto shrink-0 md:h-full overscroll-contain"
                   >
                     {/* Project Picture with Zoom On Click */}
                     <div
                       onClick={() => setIsImageZoomed(true)}
-                      className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-sm shrink-0 cursor-zoom-in group/zoom"
+                      className="relative w-full aspect-[16/10] sm:aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-sm shrink-0 cursor-zoom-in group/zoom"
                       role="button"
                       tabIndex={0}
                       aria-label="Click to zoom picture"
@@ -326,8 +326,8 @@ export default function Projects() {
                       />
 
                       {/* Zoom Hint Badge */}
-                      <div className="absolute bottom-3 right-3 z-10">
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/75 backdrop-blur-md text-white text-[11px] font-semibold tracking-wide shadow-md group-hover/zoom:bg-black transition-colors">
+                      <div className="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 z-10">
+                        <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-black/75 backdrop-blur-md text-white text-[10px] sm:text-[11px] font-semibold tracking-wide shadow-md group-hover/zoom:bg-black transition-colors">
                           <ZoomIn className="w-3.5 h-3.5" />
                           <span>Click to zoom</span>
                         </span>
@@ -335,8 +335,8 @@ export default function Projects() {
                     </div>
 
                     {/* Metadata Strip */}
-                    <div className="flex flex-col gap-2.5">
-                      <div className="flex items-center gap-3 p-3 bg-white rounded-xl border border-gray-100 shadow-xs">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-1 gap-2 sm:gap-2.5">
+                      <div className="flex items-center gap-3 p-2.5 sm:p-3 bg-white rounded-xl border border-gray-100 shadow-xs">
                         <div className="w-8 h-8 rounded-lg bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-700 shrink-0">
                           <Briefcase className="w-4 h-4" />
                         </div>
@@ -346,7 +346,7 @@ export default function Projects() {
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-3 p-3 bg-white rounded-xl border border-gray-100 shadow-xs">
+                      <div className="flex items-center gap-3 p-2.5 sm:p-3 bg-white rounded-xl border border-gray-100 shadow-xs">
                         <div className="w-8 h-8 rounded-lg bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-700 shrink-0">
                           <Calendar className="w-4 h-4" />
                         </div>
@@ -356,7 +356,7 @@ export default function Projects() {
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-3 p-3 bg-white rounded-xl border border-gray-100 shadow-xs">
+                      <div className="flex items-center gap-3 p-2.5 sm:p-3 bg-white rounded-xl border border-gray-100 shadow-xs">
                         <div className="w-8 h-8 rounded-lg bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-700 shrink-0">
                           <Layers className="w-4 h-4" />
                         </div>
@@ -373,7 +373,7 @@ export default function Projects() {
                         href={selectedProject.detailsLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mt-auto w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-black text-white font-bold text-xs sm:text-sm hover:bg-gray-800 transition-all shadow-sm"
+                        className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-black text-white font-bold text-xs sm:text-sm hover:bg-gray-800 transition-all shadow-sm shrink-0"
                       >
                         <span>Visit Live Site</span>
                         <ExternalLink className="w-4 h-4" />
@@ -384,7 +384,7 @@ export default function Projects() {
                   {/* RIGHT COLUMN: Detailed Information & Breakdown */}
                   <div 
                     data-lenis-prevent
-                    className="md:col-span-7 flex flex-col overflow-y-auto min-h-0 md:h-full p-5 sm:p-6 md:p-8 space-y-6 overscroll-contain"
+                    className="w-full md:w-[58%] lg:w-[60%] flex-1 flex flex-col p-4 sm:p-6 md:p-8 space-y-6 md:overflow-y-auto md:h-full overscroll-contain"
                   >
                     {/* Overview */}
                     <div>
@@ -397,9 +397,9 @@ export default function Projects() {
                     </div>
 
                     {/* Problem & Solution */}
-                    <div className="space-y-4">
-                      <div className="p-5 rounded-2xl bg-white border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.02)]">
-                        <h4 className="text-xs font-bold uppercase tracking-widest text-red-500 mb-2">
+                    <div className="space-y-3 sm:space-y-4">
+                      <div className="p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-white border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.02)]">
+                        <h4 className="text-xs font-bold uppercase tracking-widest text-red-500 mb-1.5 sm:mb-2">
                           The Challenge & Problem
                         </h4>
                         <p className="text-gray-700 text-xs sm:text-sm leading-[1.8] font-normal">
@@ -407,8 +407,8 @@ export default function Projects() {
                         </p>
                       </div>
 
-                      <div className="p-5 rounded-2xl bg-white border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.02)]">
-                        <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-600 mb-2">
+                      <div className="p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-white border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.02)]">
+                        <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-600 mb-1.5 sm:mb-2">
                           The Technical Solution
                         </h4>
                         <p className="text-gray-700 text-xs sm:text-sm leading-[1.8] font-normal">
@@ -422,11 +422,11 @@ export default function Projects() {
                       <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-black mb-3">
                         Key Technical Features & Architecture
                       </h4>
-                      <div className="grid grid-cols-1 gap-2.5">
+                      <div className="grid grid-cols-1 gap-2 sm:gap-2.5">
                         {selectedProject.features.map((feature, i) => (
                           <div
                             key={i}
-                            className="flex items-start gap-3 p-3 rounded-xl bg-gray-50/80 border border-gray-100"
+                            className="flex items-start gap-2.5 sm:gap-3 p-3 rounded-xl bg-gray-50/80 border border-gray-100"
                           >
                             <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                             <span className="text-gray-800 text-xs sm:text-sm leading-relaxed font-medium">
@@ -439,14 +439,14 @@ export default function Projects() {
 
                     {/* Technology Stack Tags */}
                     <div>
-                      <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-black mb-3">
+                      <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-black mb-2.5 sm:mb-3">
                         Technologies & Environment
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {selectedProject.metrics.map((m, i) => (
                           <div
                             key={i}
-                            className="px-3.5 py-1.5 rounded-lg bg-gray-50 border border-gray-200 flex flex-col"
+                            className="px-3 py-1.5 rounded-lg bg-gray-50 border border-gray-200 flex flex-col"
                           >
                             <span className="text-xs font-bold text-black">{m.value}</span>
                             <span className="text-[10px] text-gray-500">{m.label}</span>
@@ -458,16 +458,16 @@ export default function Projects() {
                 </div>
 
                 {/* Modal Footer */}
-                <div className="px-6 sm:px-8 py-3.5 border-t border-gray-100 bg-gray-50/50 flex items-center justify-between shrink-0">
-                  <span className="text-xs text-gray-500">
-                    Press <kbd className="px-2 py-0.5 bg-white border border-gray-200 rounded text-[10px] font-semibold">ESC</kbd> to close
+                <div className="px-4 sm:px-6 md:px-8 py-3 sm:py-3.5 border-t border-gray-100 bg-gray-50/50 flex items-center justify-between shrink-0">
+                  <span className="text-[11px] sm:text-xs text-gray-500">
+                    Press <kbd className="px-1.5 sm:px-2 py-0.5 bg-white border border-gray-200 rounded text-[10px] font-semibold">ESC</kbd> to close
                   </span>
                   <button
                     onClick={() => {
                       setIsImageZoomed(false);
                       setSelectedProject(null);
                     }}
-                    className="px-5 py-2 rounded-full border border-gray-200 bg-white text-black font-semibold text-xs sm:text-sm hover:bg-gray-100 transition-colors cursor-pointer"
+                    className="px-4 sm:px-5 py-1.5 sm:py-2 rounded-full border border-gray-200 bg-white text-black font-semibold text-xs sm:text-sm hover:bg-gray-100 transition-colors cursor-pointer"
                   >
                     Close
                   </button>
