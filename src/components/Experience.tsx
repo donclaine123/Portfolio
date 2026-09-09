@@ -8,20 +8,20 @@ export default function Experience() {
     {
       id: "01",
       title: "Full Stack Web Development",
-      description: "End-to-end web applications built using modern frameworks like React, Node.js, and solid database architectures.",
-      tags: ["React / Next.js", "Node.js", "REST APIs", "Database Design"]
+      description: "Building end-to-end, high-performance web applications with responsive user interfaces, clean component architecture, and modern frameworks like Next.js, React, and TypeScript.",
+      tags: ["React / Next.js", "TypeScript", "Tailwind CSS", "Responsive UI"]
     },
     {
       id: "02",
-      title: "IT Support & Operations",
-      description: "Managed high-stakes deployments, enterprise workstation configurations, and rigorous data security protocols.",
-      tags: ["System Admin", "Hardware Support", "Networking", "Security"]
+      title: "Backend & API Engineering",
+      description: "Designing secure, scalable RESTful APIs, handling complex server-side business logic, and implementing robust authentication protocols (JWT / RBAC) using Node.js and Express.",
+      tags: ["Node.js", "Express.js", "RESTful APIs", "JWT / RBAC Auth"]
     },
     {
       id: "03",
-      title: "Systems Architecture",
-      description: "Transforming complex business logic into intuitive, secure, real-time ecosystems.",
-      tags: ["Socket.IO", "PostgreSQL", "RBAC Auth", "Optimization"]
+      title: "Database & Real-Time Architecture",
+      description: "Architecting structured relational database schemas with PostgreSQL and MySQL, paired with event-driven, low-latency real-time communication powered by Socket.IO and WebSockets.",
+      tags: ["Socket.IO", "PostgreSQL", "MySQL", "WebSockets"]
     }
   ];
 
