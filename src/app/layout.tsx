@@ -90,7 +90,7 @@ export const metadata: Metadata = {
     apple: "/mark.png",
   },
   verification: {
-    google: "googled537ecc9db18c5e4",
+    google: "google5bcf944fd2d85eac",
   },
 };
 
