@@ -92,8 +92,6 @@ export default function Projects() {
       timeline: "2025 – 2026",
       industry: "Web Application",
       description: "Developed 'Ecart' — a modern, full-stack e-commerce web application built from the ground up using React 19, Vite, and a Laravel 11 REST API connected to a live Supabase PostgreSQL database. The platform delivers a fast, responsive shopping experience with real-time cart synchronization, atomic order checkout, Stripe payments, and a dedicated admin portal.",
-      problem: "Traditional e-commerce architectures often encounter performance bottlenecks from unoptimized database queries, inventory overselling during concurrent checkouts, complex payment webhook failures, and fragmented admin workflows.",
-      solution: "Engineered a high-performance decoupled architecture utilizing React 19 and Laravel 11. Implemented query-level caching, atomic database transactions with pessimistic row locking (lockForUpdate), secure Stripe payment verification, and a role-guarded management dashboard.",
       highlights: [
         {
           title: "⚡ Blazing Fast Loading Speeds",
@@ -119,14 +117,6 @@ export default function Projects() {
           title: "✅ Comprehensive Automated Testing Suite",
           description: "Authored 39 automated unit and feature tests with 120 assertions covering authentication, CORS security policies, cart operations, atomic stock integrity, and checkout transactions."
         }
-      ],
-      features: [
-        "Query-level server caching cutting catalog response times from ~3,300ms down to 16ms with 91.5% bundle reduction",
-        "Optimistic shopping cart updates and atomic checkout with pessimistic row locking (lockForUpdate)",
-        "Secure Stripe Elements card checkout with authoritative calculations and webhook signatures",
-        "Role-guarded admin dashboard for inventory tracking, product CRUD, and order fulfillment via Laravel Sanctum",
-        "Instant live search, dynamic category filtering, skeleton loading, and zero layout shift",
-        "39 automated unit and feature tests with 120 assertions covering auth, CORS, cart, and stock integrity"
       ],
       techStack: [
         {
