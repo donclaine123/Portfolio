@@ -150,12 +150,28 @@ const jsonLd = {
         "JavaScript",
         "Node.js",
         "Express.js",
+        "Laravel",
+        "PHP",
         "PostgreSQL",
         "MySQL",
+        "Supabase",
         "Socket.IO",
         "REST APIs",
+        "Stripe Payments",
         "System Architecture",
       ],
+    },
+    {
+      "@type": "SoftwareApplication",
+      name: "Ecart — Modern E-Commerce Platform",
+      operatingSystem: "Web",
+      applicationCategory: "BusinessApplication",
+      description:
+        "Modern full-stack e-commerce web application with React 19, Laravel 11 REST API, Supabase PostgreSQL, and Stripe payment processing.",
+      url: "https://markalexisbatis.vercel.app/#projects",
+      author: {
+        "@id": "https://markalexisbatis.vercel.app/#person",
+      },
     },
     {
       "@type": "SoftwareApplication",

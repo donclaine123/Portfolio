@@ -12,6 +12,16 @@ interface Metric {
   value: string;
 }
 
+interface HighlightItem {
+  title: string;
+  description: string;
+}
+
+interface TechStackGroup {
+  category: string;
+  skills: string[];
+}
+
 interface CaseStudy {
   id: string;
   title: string;
@@ -20,9 +30,11 @@ interface CaseStudy {
   timeline: string;
   industry: string;
   description: string;
-  problem: string;
-  solution: string;
-  features: string[];
+  problem?: string;
+  solution?: string;
+  highlights?: HighlightItem[];
+  features?: string[];
+  techStack?: TechStackGroup[];
   image: string;
   metrics: Metric[];
   status: "available" | "coming-soon";
@@ -72,6 +84,74 @@ export default function Projects() {
   }, [selectedProject, isImageZoomed]);
 
   const caseStudies: CaseStudy[] = [
+    {
+      id: "ecart",
+      title: "Ecart — Modern E-Commerce Platform",
+      role: "Full Stack Developer",
+      company: "Personal Project • Ecart",
+      timeline: "2025 – 2026",
+      industry: "Web Application",
+      description: "Developed 'Ecart' — a modern, full-stack e-commerce web application built from the ground up using React 19, Vite, and a Laravel 11 REST API connected to a live Supabase PostgreSQL database. The platform delivers a fast, responsive shopping experience with real-time cart synchronization, atomic order checkout, Stripe payments, and a dedicated admin portal.",
+      problem: "Traditional e-commerce architectures often encounter performance bottlenecks from unoptimized database queries, inventory overselling during concurrent checkouts, complex payment webhook failures, and fragmented admin workflows.",
+      solution: "Engineered a high-performance decoupled architecture utilizing React 19 and Laravel 11. Implemented query-level caching, atomic database transactions with pessimistic row locking (lockForUpdate), secure Stripe payment verification, and a role-guarded management dashboard.",
+      highlights: [
+        {
+          title: "⚡ Blazing Fast Loading Speeds",
+          description: "Engineered query-level server caching and 0ms client-side cache hydration, cutting catalog response times from ~3,300ms down to 16ms, paired with route-level code splitting that reduced the initial JavaScript bundle by 91.5%."
+        },
+        {
+          title: "🛒 Real-Time Cart & Atomic Checkout",
+          description: "Built a responsive shopping cart with optimistic UI updates and protected backend checkout transactions that use pessimistic database row locking (lockForUpdate) to eliminate stock overselling and race conditions."
+        },
+        {
+          title: "💳 Integrated Stripe Payment Processing",
+          description: "Implemented secure card checkout via Stripe Elements with authoritative server-side price calculations, cryptographic webhook signature verification, and duplicate payment prevention."
+        },
+        {
+          title: "🛠️ Role-Guarded Admin Management Portal",
+          description: "Developed an administrative dashboard with live inventory tracking, product CRUD operations, category filters, and order fulfillment status management protected by Laravel Sanctum role middleware."
+        },
+        {
+          title: "🔍 Responsive Modern Storefront Design",
+          description: "Crafted a sleek, mobile-friendly interface featuring dynamic category filtering, instant live search, skeleton loading placeholders, and asynchronous image rendering for zero visual layout jump."
+        },
+        {
+          title: "✅ Comprehensive Automated Testing Suite",
+          description: "Authored 39 automated unit and feature tests with 120 assertions covering authentication, CORS security policies, cart operations, atomic stock integrity, and checkout transactions."
+        }
+      ],
+      features: [
+        "Query-level server caching cutting catalog response times from ~3,300ms down to 16ms with 91.5% bundle reduction",
+        "Optimistic shopping cart updates and atomic checkout with pessimistic row locking (lockForUpdate)",
+        "Secure Stripe Elements card checkout with authoritative calculations and webhook signatures",
+        "Role-guarded admin dashboard for inventory tracking, product CRUD, and order fulfillment via Laravel Sanctum",
+        "Instant live search, dynamic category filtering, skeleton loading, and zero layout shift",
+        "39 automated unit and feature tests with 120 assertions covering auth, CORS, cart, and stock integrity"
+      ],
+      techStack: [
+        {
+          category: "Frontend",
+          skills: ["React 19", "Vite", "Tailwind CSS", "Lucide Icons", "Axios", "React Router"]
+        },
+        {
+          category: "Backend",
+          skills: ["Laravel 11", "PHP 8.2+", "Laravel Sanctum", "PHPUnit"]
+        },
+        {
+          category: "Database & Services",
+          skills: ["Supabase (PostgreSQL)", "Stripe API"]
+        }
+      ],
+      image: `${basePath}/ecart.png`,
+      status: "available",
+      detailsLink: "https://ecart-storefront.vercel.app",
+      metrics: [
+        { value: "React 19", label: "Frontend UI" },
+        { value: "Laravel 11", label: "REST API Backend" },
+        { value: "PostgreSQL", label: "Supabase DB" },
+        { value: "Stripe", label: "Payment Gateway" }
+      ]
+    },
     {
       id: "qr-attendance",
       title: "QR Code Attendance & Monitoring System",
@@ -145,7 +225,7 @@ export default function Projects() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 lg:gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-8">
           {caseStudies.map((cs, idx) => (
             <motion.div
               key={cs.id}
@@ -396,64 +476,119 @@ export default function Projects() {
                       </p>
                     </div>
 
-                    {/* Problem & Solution */}
-                    <div className="space-y-3 sm:space-y-4">
-                      <div className="p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-white border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.02)]">
-                        <h4 className="text-xs font-bold uppercase tracking-widest text-red-500 mb-1.5 sm:mb-2">
-                          The Challenge & Problem
+                    {/* Problem & Solution (if available) */}
+                    {selectedProject.problem && selectedProject.solution && (
+                      <div className="space-y-3 sm:space-y-4">
+                        <div className="p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-white border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.02)]">
+                          <h4 className="text-xs font-bold uppercase tracking-widest text-red-500 mb-1.5 sm:mb-2">
+                            The Challenge & Problem
+                          </h4>
+                          <p className="text-gray-700 text-xs sm:text-sm leading-[1.8] font-normal">
+                            {selectedProject.problem}
+                          </p>
+                        </div>
+
+                        <div className="p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-white border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.02)]">
+                          <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-600 mb-1.5 sm:mb-2">
+                            The Technical Solution
+                          </h4>
+                          <p className="text-gray-700 text-xs sm:text-sm leading-[1.8] font-normal">
+                            {selectedProject.solution}
+                          </p>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Project Highlights & Architecture (if available) */}
+                    {selectedProject.highlights && selectedProject.highlights.length > 0 && (
+                      <div>
+                        <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-black mb-3">
+                          Project Highlights & Architecture
                         </h4>
-                        <p className="text-gray-700 text-xs sm:text-sm leading-[1.8] font-normal">
-                          {selectedProject.problem}
-                        </p>
+                        <div className="grid grid-cols-1 gap-2.5 sm:gap-3">
+                          {selectedProject.highlights.map((item, i) => (
+                            <div
+                              key={i}
+                              className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-gray-50/80 border border-gray-100 flex flex-col gap-1.5 transition-all hover:bg-gray-50"
+                            >
+                              <span className="text-xs sm:text-sm font-bold text-black flex items-center gap-1.5">
+                                {item.title}
+                              </span>
+                              <p className="text-gray-600 text-xs sm:text-sm leading-[1.7] font-normal">
+                                {item.description}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
                       </div>
+                    )}
 
-                      <div className="p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-white border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.02)]">
-                        <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-600 mb-1.5 sm:mb-2">
-                          The Technical Solution
+                    {/* Key Technical Features (for projects without highlights) */}
+                    {(!selectedProject.highlights || selectedProject.highlights.length === 0) && selectedProject.features && selectedProject.features.length > 0 && (
+                      <div>
+                        <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-black mb-3">
+                          Key Technical Features & Architecture
                         </h4>
-                        <p className="text-gray-700 text-xs sm:text-sm leading-[1.8] font-normal">
-                          {selectedProject.solution}
-                        </p>
+                        <div className="grid grid-cols-1 gap-2 sm:gap-2.5">
+                          {selectedProject.features.map((feature, i) => (
+                            <div
+                              key={i}
+                              className="flex items-start gap-2.5 sm:gap-3 p-3 rounded-xl bg-gray-50/80 border border-gray-100"
+                            >
+                              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                              <span className="text-gray-800 text-xs sm:text-sm leading-relaxed font-medium">
+                                {feature}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    </div>
+                    )}
 
-                    {/* Core Features */}
-                    <div>
-                      <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-black mb-3">
-                        Key Technical Features & Architecture
-                      </h4>
-                      <div className="grid grid-cols-1 gap-2 sm:gap-2.5">
-                        {selectedProject.features.map((feature, i) => (
-                          <div
-                            key={i}
-                            className="flex items-start gap-2.5 sm:gap-3 p-3 rounded-xl bg-gray-50/80 border border-gray-100"
-                          >
-                            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                            <span className="text-gray-800 text-xs sm:text-sm leading-relaxed font-medium">
-                              {feature}
-                            </span>
-                          </div>
-                        ))}
+                    {/* Technology Stack / Grouped Stack */}
+                    {selectedProject.techStack && selectedProject.techStack.length > 0 ? (
+                      <div>
+                        <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-black mb-2.5 sm:mb-3">
+                          Tech Stack
+                        </h4>
+                        <div className="space-y-2.5">
+                          {selectedProject.techStack.map((group, idx) => (
+                            <div key={idx} className="p-3.5 rounded-xl bg-gray-50/80 border border-gray-100">
+                              <span className="text-[11px] font-bold uppercase tracking-wider text-gray-500 block mb-2">
+                                {group.category}
+                              </span>
+                              <div className="flex flex-wrap gap-1.5">
+                                {group.skills.map((skill, sIdx) => (
+                                  <span
+                                    key={sIdx}
+                                    className="px-2.5 py-1 rounded-md bg-white border border-gray-200 text-xs font-semibold text-gray-800 shadow-2xs"
+                                  >
+                                    {skill}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-
-                    {/* Technology Stack Tags */}
-                    <div>
-                      <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-black mb-2.5 sm:mb-3">
-                        Technologies & Environment
-                      </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {selectedProject.metrics.map((m, i) => (
-                          <div
-                            key={i}
-                            className="px-3 py-1.5 rounded-lg bg-gray-50 border border-gray-200 flex flex-col"
-                          >
-                            <span className="text-xs font-bold text-black">{m.value}</span>
-                            <span className="text-[10px] text-gray-500">{m.label}</span>
-                          </div>
-                        ))}
+                    ) : (
+                      <div>
+                        <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-black mb-2.5 sm:mb-3">
+                          Technologies & Environment
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          {selectedProject.metrics.map((m, i) => (
+                            <div
+                              key={i}
+                              className="px-3 py-1.5 rounded-lg bg-gray-50 border border-gray-200 flex flex-col"
+                            >
+                              <span className="text-xs font-bold text-black">{m.value}</span>
+                              <span className="text-[10px] text-gray-500">{m.label}</span>
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </div>
                 </div>
 
