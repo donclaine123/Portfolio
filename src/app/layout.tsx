@@ -168,7 +168,7 @@ const jsonLd = {
       applicationCategory: "BusinessApplication",
       description:
         "Modern full-stack e-commerce web application with React 19, Laravel 11 REST API, Supabase PostgreSQL, and Stripe payment processing.",
-      url: "https://markalexisbatis.vercel.app/#projects",
+      url: "https://myecart.vercel.app",
       author: {
         "@id": "https://markalexisbatis.vercel.app/#person",
       },

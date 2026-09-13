@@ -5,7 +5,7 @@ import Image from "next/image";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLenis } from "lenis/react";
-import { ExternalLink, X, CheckCircle2, Calendar, Briefcase, Layers, ArrowUpRight, ZoomIn } from "lucide-react";
+import { ExternalLink, X, CheckCircle2, Calendar, Briefcase, Layers, ArrowUpRight, ZoomIn, ShoppingBag } from "lucide-react";
 
 interface Metric {
   label: string;
@@ -35,7 +35,7 @@ interface CaseStudy {
   highlights?: HighlightItem[];
   features?: string[];
   techStack?: TechStackGroup[];
-  image: string;
+  image?: string;
   metrics: Metric[];
   status: "available" | "coming-soon";
   detailsLink?: string;
@@ -134,7 +134,7 @@ export default function Projects() {
       ],
       image: `${basePath}/ecart.png`,
       status: "available",
-      detailsLink: "https://ecart-storefront.vercel.app",
+      detailsLink: "https://myecart.vercel.app",
       metrics: [
         { value: "React 19", label: "Frontend UI" },
         { value: "Laravel 11", label: "REST API Backend" },
@@ -225,10 +225,10 @@ export default function Projects() {
               transition={{ duration: 0.6, delay: idx * 0.1 }}
               className="flex flex-col group"
             >
-              {/* Project Preview Image - Click triggers detailed modal */}
+              {/* Project Preview Image / Card Header - Click triggers detailed modal */}
               <div
                 onClick={() => setSelectedProject(cs)}
-                className="relative w-full aspect-[16/10] sm:aspect-[4/3] rounded-2xl sm:rounded-[2rem] mb-5 sm:mb-6 overflow-hidden bg-gray-50 border border-gray-100 shadow-[0_4px_20px_rgb(0,0,0,0.03)] group-hover:shadow-[0_12px_30px_rgb(0,0,0,0.09)] transition-all duration-500 cursor-pointer"
+                className="relative w-full aspect-[16/10] sm:aspect-[4/3] rounded-2xl sm:rounded-[2rem] mb-5 sm:mb-6 overflow-hidden bg-gray-50 border border-gray-100 shadow-[0_4px_20px_rgb(0,0,0,0.03)] group-hover:shadow-[0_12px_30px_rgb(0,0,0,0.09)] transition-all duration-500 cursor-pointer flex items-center justify-center"
                 role="button"
                 tabIndex={0}
                 aria-label={`View detailed case study for ${cs.title}`}
@@ -239,23 +239,54 @@ export default function Projects() {
                   }
                 }}
               >
-                <Image
-                  src={cs.image}
-                  alt={cs.title}
-                  fill
-                  className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-                
-                {/* Floating pill badge on image */}
-                <div className="absolute top-4 left-4 z-10">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/75 backdrop-blur-md text-white text-[11px] font-semibold tracking-wide shadow-sm">
-                    Click picture for details
-                  </span>
-                </div>
+                {cs.image ? (
+                  <>
+                    <Image
+                      src={cs.image}
+                      alt={cs.title}
+                      fill
+                      unoptimized
+                      className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                    
+                    {/* Floating pill badge on image */}
+                    <div className="absolute top-4 left-4 z-10">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/75 backdrop-blur-md text-white text-[11px] font-semibold tracking-wide shadow-sm">
+                        Click picture for details
+                      </span>
+                    </div>
+                  </>
+                ) : (
+                  <div className="w-full h-full p-6 sm:p-8 flex flex-col justify-between bg-gradient-to-br from-neutral-900 via-zinc-900 to-black text-white relative select-none">
+                    <div className="flex items-center justify-between">
+                      <span className="px-3 py-1 rounded-full bg-white/10 text-white text-[11px] font-semibold tracking-wide backdrop-blur-xs border border-white/10">
+                        {cs.industry}
+                      </span>
+                      <span className="text-[11px] text-gray-400 font-mono">{cs.timeline}</span>
+                    </div>
+
+                    <div className="my-auto py-2">
+                      <div className="w-12 h-12 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center mb-3">
+                        <ShoppingBag className="w-6 h-6 text-white" />
+                      </div>
+                      <h4 className="text-xl sm:text-2xl font-black text-white tracking-tight leading-snug">
+                        {cs.title}
+                      </h4>
+                      <p className="text-xs text-gray-300 mt-1 line-clamp-2">
+                        {cs.role} • {cs.company}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center justify-between text-[11px] text-gray-400 border-t border-white/10 pt-3">
+                      <span>Click to view case study</span>
+                      <ArrowUpRight className="w-4 h-4 text-white" />
+                    </div>
+                  </div>
+                )}
 
                 {/* Hover overlay hint */}
-                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
                   <span className="px-5 py-2.5 rounded-full bg-white text-black font-bold text-xs sm:text-sm shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                     View Case Study
                   </span>
@@ -373,36 +404,39 @@ export default function Projects() {
                     data-lenis-prevent
                     className="w-full md:w-[42%] lg:w-[40%] flex flex-col gap-4 sm:gap-5 p-4 sm:p-6 md:p-8 bg-gray-50/70 border-b md:border-b-0 md:border-r border-gray-100 md:overflow-y-auto shrink-0 md:h-full overscroll-contain"
                   >
-                    {/* Project Picture with Zoom On Click */}
-                    <div
-                      onClick={() => setIsImageZoomed(true)}
-                      className="relative w-full aspect-[16/10] sm:aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-sm shrink-0 cursor-zoom-in group/zoom"
-                      role="button"
-                      tabIndex={0}
-                      aria-label="Click to zoom picture"
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" || e.key === " ") {
-                          e.preventDefault();
-                          setIsImageZoomed(true);
-                        }
-                      }}
-                    >
-                      <Image
-                        src={selectedProject.image}
-                        alt={selectedProject.title}
-                        fill
-                        className="object-cover object-top transition-transform duration-300 group-hover/zoom:scale-105"
-                        sizes="(max-width: 768px) 100vw, 40vw"
-                      />
+                    {/* Project Picture with Zoom On Click (if available) */}
+                    {selectedProject.image && (
+                      <div
+                        onClick={() => setIsImageZoomed(true)}
+                        className="relative w-full aspect-[16/10] sm:aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-sm shrink-0 cursor-zoom-in group/zoom"
+                        role="button"
+                        tabIndex={0}
+                        aria-label="Click to zoom picture"
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            setIsImageZoomed(true);
+                          }
+                        }}
+                      >
+                        <Image
+                          src={selectedProject.image}
+                          alt={selectedProject.title}
+                          fill
+                          unoptimized
+                          className="object-cover object-top transition-transform duration-300 group-hover/zoom:scale-105"
+                          sizes="(max-width: 768px) 100vw, 40vw"
+                        />
 
-                      {/* Zoom Hint Badge */}
-                      <div className="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 z-10">
-                        <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-black/75 backdrop-blur-md text-white text-[10px] sm:text-[11px] font-semibold tracking-wide shadow-md group-hover/zoom:bg-black transition-colors">
-                          <ZoomIn className="w-3.5 h-3.5" />
-                          <span>Click to zoom</span>
-                        </span>
+                        {/* Zoom Hint Badge */}
+                        <div className="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 z-10">
+                          <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-black/75 backdrop-blur-md text-white text-[10px] sm:text-[11px] font-semibold tracking-wide shadow-md group-hover/zoom:bg-black transition-colors">
+                            <ZoomIn className="w-3.5 h-3.5" />
+                            <span>Click to zoom</span>
+                          </span>
+                        </div>
                       </div>
-                    </div>
+                    )}
 
                     {/* Metadata Strip */}
                     <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-1 gap-2 sm:gap-2.5">
@@ -608,7 +642,7 @@ export default function Projects() {
       {/* FULLSCREEN IMAGE ZOOM LIGHTBOX (Portaled to body) */}
       {typeof document !== "undefined" && createPortal(
         <AnimatePresence>
-          {isImageZoomed && selectedProject && (
+          {isImageZoomed && selectedProject && selectedProject.image && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -655,6 +689,7 @@ export default function Projects() {
                     src={selectedProject.image}
                     alt={selectedProject.title}
                     fill
+                    unoptimized
                     className="object-contain"
                     sizes="95vw"
                     priority
