@@ -158,8 +158,25 @@ const jsonLd = {
         "Socket.IO",
         "REST APIs",
         "Stripe Payments",
+        "Mobile App Development",
+        "React Native",
+        "Expo",
+        "SQLite",
+        "Android Widgets",
         "System Architecture",
       ],
+    },
+    {
+      "@type": "SoftwareApplication",
+      name: "Pocket — Penny Journal",
+      operatingSystem: "Android",
+      applicationCategory: "FinanceApplication",
+      description:
+        "Minimalist, distraction-free mobile expense tracker with 100% offline-first privacy, Android home screen widgets, and 3-second transaction logging.",
+      url: "https://github.com/donclaine123/pocket",
+      author: {
+        "@id": "https://markalexisbatis.vercel.app/#person",
+      },
     },
     {
       "@type": "SoftwareApplication",

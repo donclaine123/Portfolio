@@ -5,7 +5,7 @@ import Image from "next/image";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLenis } from "lenis/react";
-import { ExternalLink, X, CheckCircle2, Calendar, Briefcase, Layers, ArrowUpRight, ZoomIn, ShoppingBag } from "lucide-react";
+import { ExternalLink, X, CheckCircle2, Calendar, Briefcase, Layers, ArrowUpRight, ZoomIn, ShoppingBag, Download, Smartphone } from "lucide-react";
 
 interface Metric {
   label: string;
@@ -40,6 +40,8 @@ interface CaseStudy {
   status: "available" | "coming-soon";
   detailsLink?: string;
   githubLink?: string;
+  downloadLink?: string;
+  isMobile?: boolean;
 }
 
 export default function Projects() {
@@ -85,11 +87,78 @@ export default function Projects() {
 
   const caseStudies: CaseStudy[] = [
     {
+      id: "pocket",
+      title: "Pocket — Penny Journal",
+      role: "Full Stack Developer",
+      company: "Personal Project • Pocket",
+      timeline: "September 2026",
+      industry: "Mobile Application",
+      description: "Pocket is a minimalist, distraction-free mobile expense tracker designed like a cozy paper notebook. Unlike bloated finance apps that require bank logins, subscriptions, and dozens of confusing charts, Pocket focuses on the core habit: logging daily expenses and income in under 3 seconds. It works 100% offline by default, requires no account to start, has zero ads or tracking, and keeps all financial data private on the user's device.",
+      problem: "Traditional finance apps are overloaded with mandatory bank integrations, intrusive ads, paid subscriptions, and dozens of complex charts that create friction. Users abandon budgeting simply because logging a single coffee takes too long or feels invasive to their personal privacy.",
+      solution: "Engineered Pocket with an offline-first architecture prioritizing instant, tactile logging in under 3 seconds. Built with local SQLite/AsyncStorage, custom neobrutalist paper styling, interactive Android home screen widgets, and optional end-to-end Supabase cloud sync.",
+      highlights: [
+        {
+          title: "📱 Native Android Home Screen Widgets",
+          description: "Built deep integration with Android's widget system (react-native-android-widget). Users can view their real-time daily spend and tap shortcut buttons to open a dedicated Quick Add sheet directly from their phone's home screen."
+        },
+        {
+          title: "⚡ Offline-First Architecture (0ms Latency)",
+          description: "Prioritized speed by saving transactions locally to SQLite and AsyncStorage first. The app launches immediately and logs transactions with zero loading spinners or network dependency."
+        },
+        {
+          title: "🚀 60 FPS Performance on Large Datasets",
+          description: "Replaced standard React Native scroll views with Shopify FlashList for cell recycling, ensuring buttery 60 FPS scrolling even when rendering thousands of historical transactions."
+        },
+        {
+          title: "🎨 Distinct Neobrutalist Design System",
+          description: "Crafted a warm, tactile visual identity featuring soft cream paper backgrounds (#F7F0E3), solid border lines, crisp offset shadows, playful sticker badges, and custom typography (Fredoka & DM Sans)."
+        }
+      ],
+      features: [
+        "3-Second Transaction Logging: Quickly log expenses or income with an amount, note, and sticker-style category tags (Coffee, Groceries, Commute, Fun, Salary, etc.)",
+        "4 Flexible Timeframe Views: Easily flip through finances by Day (daily budget & 1-tap jump to today), Week (weekly cash flow), Month (income vs. expense progress bars), or All History (monthly archives)",
+        "6 Android Home Screen Widgets: Add interactive widgets to your home screen ranging from a 1x1 quick-entry button to 2x1 balance counters, 4x1 banner bars, and a 4x4 full ledger dashboard",
+        "Instant Search & Sort: Real-time search across past transactions by note, category, or amount, plus a 1-tap toggle to sort between newest and oldest",
+        "20+ Global Currencies: Multi-currency support including PHP (₱), USD ($), EUR (€), GBP (£), JPY (¥), SGD (S$), and more, updating all ledger cards and input fields dynamically",
+        "Offline-First with Optional Cloud Sync: Use the app completely offline with zero sign-up, or optionally sign in with an account to sync data across devices",
+        "Safe In-App Updates: Check and install updates directly with zero risk of local guest data being wiped"
+      ],
+      techStack: [
+        {
+          category: "Frontend & Mobile Core",
+          skills: ["React Native (0.76)", "Expo (SDK 52)", "TypeScript", "Expo Router", "Shopify FlashList", "React Native Reanimated", "Lucide Icons"]
+        },
+        {
+          category: "Local Storage & Database",
+          skills: ["Expo SQLite", "AsyncStorage", "Expo Secure Store"]
+        },
+        {
+          category: "Backend & Cloud (Optional Sync)",
+          skills: ["Supabase (PostgreSQL)", "Supabase Auth", "PowerSync"]
+        },
+        {
+          category: "Native Features & Distribution",
+          skills: ["react-native-android-widget", "EAS Build (Android APKs)", "Android Deep Linking"]
+        }
+      ],
+      image: `${basePath}/pocket.png`,
+      status: "available",
+      isMobile: true,
+      githubLink: "https://github.com/donclaine123/pocket",
+      downloadLink: "https://github.com/donclaine123/pocket/releases",
+      metrics: [
+        { value: "React Native", label: "Mobile Core" },
+        { value: "Expo SDK 52", label: "Runtime" },
+        { value: "Expo SQLite", label: "Local Database" },
+        { value: "Android Widgets", label: "Native Extension" }
+      ]
+    },
+    {
       id: "ecart",
       title: "Ecart — Modern E-Commerce Platform",
       role: "Full Stack Developer",
       company: "Personal Project • Ecart",
-      timeline: "2025 – 2026",
+      timeline: "August 2026",
       industry: "Web Application",
       description: "Developed 'Ecart' — a modern, full-stack e-commerce web application built from the ground up using React 19, Vite, and a Laravel 11 REST API connected to a live Supabase PostgreSQL database. The platform delivers a fast, responsive shopping experience with real-time cart synchronization, atomic order checkout, Stripe payments, and a dedicated admin portal.",
       highlights: [
@@ -147,7 +216,7 @@ export default function Projects() {
       title: "QR Code Attendance & Monitoring System",
       role: "Lead Full Stack Developer",
       company: "Thesis Project • St. Clare College",
-      timeline: "2025 - 2026",
+      timeline: "January – May 2026",
       industry: "Real-time Monitoring",
       description: "Faculty attendance tracking was a manual, paper-based bottleneck. I engineered a real-time QR Code ecosystem that transformed the workflow into a secure, instant monitoring system.",
       problem: "Faculty attendance tracking in academic institutions previously relied on manual pen-and-paper sign-ins and biometric queues. This caused administrative delays, lack of live visibility, proxy sign-ins, and inaccurate attendance records during audits.",
@@ -174,7 +243,7 @@ export default function Projects() {
       title: "Student Attendance System",
       role: "Full Stack Developer",
       company: "Personal Project • EazyAttend",
-      timeline: "2024 - 2025",
+      timeline: "March – April 2026",
       industry: "Web Application",
       description: "Developed 'EazyAttend'—a full-stack web application designed to automate presence verification via a scan. Constructed a robust security layer implementing encrypted session-based authentication.",
       problem: "Manual attendance roll-calls in classroom environments consumed 10 to 15 minutes of valuable instructional time per session and were prone to human record-keeping errors and paper waste.",
@@ -215,7 +284,7 @@ export default function Projects() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10">
           {caseStudies.map((cs, idx) => (
             <motion.div
               key={cs.id}
@@ -240,23 +309,56 @@ export default function Projects() {
                 }}
               >
                 {cs.image ? (
-                  <>
-                    <Image
-                      src={cs.image}
-                      alt={cs.title}
-                      fill
-                      unoptimized
-                      className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                    />
-                    
-                    {/* Floating pill badge on image */}
-                    <div className="absolute top-4 left-4 z-10">
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/75 backdrop-blur-md text-white text-[11px] font-semibold tracking-wide shadow-sm">
-                        Click picture for details
-                      </span>
+                  cs.isMobile ? (
+                    <div className="relative w-full h-full flex items-center justify-center overflow-hidden bg-[#FAF5EA]">
+                      {/* Ambient background blur */}
+                      <Image
+                        src={cs.image}
+                        alt=""
+                        fill
+                        unoptimized
+                        className="object-cover blur-2xl opacity-30 scale-125 select-none pointer-events-none"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent pointer-events-none" />
+
+                      {/* Floating pill badge on image */}
+                      <div className="absolute top-4 left-4 z-10">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/75 backdrop-blur-md text-white text-[11px] font-semibold tracking-wide shadow-sm">
+                          Click picture for details
+                        </span>
+                      </div>
+
+                      {/* Clean mobile phone mockup frame */}
+                      <div className="relative h-[86%] sm:h-[88%] aspect-[382/896] rounded-[1.2rem] sm:rounded-[1.4rem] overflow-hidden shadow-[0_12px_32px_rgba(0,0,0,0.22)] border-[3px] border-[#29221F] bg-[#FFFDF9] transition-transform duration-500 group-hover:scale-105 z-1">
+                        <Image
+                          src={cs.image}
+                          alt={cs.title}
+                          fill
+                          unoptimized
+                          className="object-cover"
+                          sizes="(max-width: 768px) 50vw, 25vw"
+                        />
+                      </div>
                     </div>
-                  </>
+                  ) : (
+                    <>
+                      <Image
+                        src={cs.image}
+                        alt={cs.title}
+                        fill
+                        unoptimized
+                        className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                      />
+                      
+                      {/* Floating pill badge on image */}
+                      <div className="absolute top-4 left-4 z-10">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/75 backdrop-blur-md text-white text-[11px] font-semibold tracking-wide shadow-sm">
+                          Click picture for details
+                        </span>
+                      </div>
+                    </>
+                  )
                 ) : (
                   <div className="w-full h-full p-6 sm:p-8 flex flex-col justify-between bg-gradient-to-br from-neutral-900 via-zinc-900 to-black text-white relative select-none">
                     <div className="flex items-center justify-between">
@@ -299,7 +401,7 @@ export default function Projects() {
                   <span className="text-xs font-bold uppercase tracking-widest text-gray-400 block">
                     {cs.industry}
                   </span>
-                  {cs.detailsLink && (
+                  {cs.detailsLink ? (
                     <a
                       href={cs.detailsLink}
                       target="_blank"
@@ -310,7 +412,30 @@ export default function Projects() {
                       <span>Visit Live Site</span>
                       <ArrowUpRight className="w-4 h-4" />
                     </a>
-                  )}
+                  ) : cs.downloadLink ? (
+                    <a
+                      href={cs.downloadLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-emerald-600 hover:text-emerald-700 transition-colors"
+                      aria-label={`Download APK for ${cs.title}`}
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                      <span>Download APK</span>
+                      <ArrowUpRight className="w-4 h-4" />
+                    </a>
+                  ) : cs.githubLink ? (
+                    <a
+                      href={cs.githubLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-xs sm:text-sm font-semibold text-gray-500 hover:text-black transition-colors"
+                      aria-label={`View GitHub repository for ${cs.title}`}
+                    >
+                      <span>GitHub</span>
+                      <ArrowUpRight className="w-4 h-4" />
+                    </a>
+                  ) : null}
                 </div>
 
                 <h3
@@ -387,6 +512,28 @@ export default function Projects() {
                         <ExternalLink className="w-3.5 h-3.5" />
                       </a>
                     )}
+                    {selectedProject.downloadLink && (
+                      <a
+                        href={selectedProject.downloadLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 bg-emerald-600 text-white rounded-full text-xs sm:text-sm font-semibold hover:bg-emerald-700 transition-colors shadow-sm"
+                      >
+                        <Download className="w-3.5 h-3.5" />
+                        <span>Download APK</span>
+                      </a>
+                    )}
+                    {selectedProject.githubLink && (
+                      <a
+                        href={selectedProject.githubLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-900 text-white rounded-full text-xs sm:text-sm font-semibold hover:bg-black transition-colors shadow-sm"
+                      >
+                        <span>GitHub</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    )}
                     <button
                       onClick={() => setSelectedProject(null)}
                       aria-label="Close project details"
@@ -408,7 +555,11 @@ export default function Projects() {
                     {selectedProject.image && (
                       <div
                         onClick={() => setIsImageZoomed(true)}
-                        className="relative w-full aspect-[16/10] sm:aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-sm shrink-0 cursor-zoom-in group/zoom"
+                        className={`relative w-full ${
+                          selectedProject.isMobile
+                            ? "h-[320px] sm:h-[380px] md:h-[400px] flex items-center justify-center bg-[#FAF5EA]"
+                            : "aspect-[16/10] sm:aspect-[4/3] bg-gray-100"
+                        } rounded-xl sm:rounded-2xl overflow-hidden border border-gray-200 shadow-sm shrink-0 cursor-zoom-in group/zoom`}
                         role="button"
                         tabIndex={0}
                         aria-label="Click to zoom picture"
@@ -419,14 +570,40 @@ export default function Projects() {
                           }
                         }}
                       >
-                        <Image
-                          src={selectedProject.image}
-                          alt={selectedProject.title}
-                          fill
-                          unoptimized
-                          className="object-cover object-top transition-transform duration-300 group-hover/zoom:scale-105"
-                          sizes="(max-width: 768px) 100vw, 40vw"
-                        />
+                        {selectedProject.isMobile ? (
+                          <>
+                            {/* Ambient background blur */}
+                            <Image
+                              src={selectedProject.image}
+                              alt=""
+                              fill
+                              unoptimized
+                              className="object-cover blur-3xl opacity-35 scale-125 select-none pointer-events-none"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent pointer-events-none" />
+
+                            {/* Centered phone mockup frame */}
+                            <div className="relative h-[88%] aspect-[382/896] rounded-[1.2rem] sm:rounded-[1.4rem] overflow-hidden shadow-[0_14px_35px_rgba(0,0,0,0.22)] border-[3px] border-[#29221F] bg-[#FFFDF9] transition-transform duration-300 group-hover/zoom:scale-105 z-1">
+                              <Image
+                                src={selectedProject.image}
+                                alt={selectedProject.title}
+                                fill
+                                unoptimized
+                                className="object-cover"
+                                sizes="(max-width: 768px) 50vw, 30vw"
+                              />
+                            </div>
+                          </>
+                        ) : (
+                          <Image
+                            src={selectedProject.image}
+                            alt={selectedProject.title}
+                            fill
+                            unoptimized
+                            className="object-cover object-top transition-transform duration-300 group-hover/zoom:scale-105"
+                            sizes="(max-width: 768px) 100vw, 40vw"
+                          />
+                        )}
 
                         {/* Zoom Hint Badge */}
                         <div className="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 z-10">
@@ -471,18 +648,43 @@ export default function Projects() {
                       </div>
                     </div>
 
-                    {/* Live Project CTA */}
-                    {selectedProject.detailsLink && (
-                      <a
-                        href={selectedProject.detailsLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-black text-white font-bold text-xs sm:text-sm hover:bg-gray-800 transition-all shadow-sm shrink-0"
-                      >
-                        <span>Visit Live Site</span>
-                        <ExternalLink className="w-4 h-4" />
-                      </a>
-                    )}
+                    {/* Action CTAs */}
+                    <div className="flex flex-col gap-2 shrink-0">
+                      {selectedProject.detailsLink && (
+                        <a
+                          href={selectedProject.detailsLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-black text-white font-bold text-xs sm:text-sm hover:bg-gray-800 transition-all shadow-sm shrink-0"
+                        >
+                          <span>Visit Live Site</span>
+                          <ExternalLink className="w-4 h-4" />
+                        </a>
+                      )}
+                      {selectedProject.downloadLink && (
+                        <a
+                          href={selectedProject.downloadLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-emerald-600 text-white font-bold text-xs sm:text-sm hover:bg-emerald-700 transition-all shadow-sm shrink-0"
+                        >
+                          <Download className="w-4 h-4" />
+                          <span>Download APK (Releases)</span>
+                          <ExternalLink className="w-4 h-4" />
+                        </a>
+                      )}
+                      {selectedProject.githubLink && (
+                        <a
+                          href={selectedProject.githubLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-gray-900 text-white font-bold text-xs sm:text-sm hover:bg-black transition-all shadow-sm shrink-0"
+                        >
+                          <span>View on GitHub</span>
+                          <ExternalLink className="w-4 h-4" />
+                        </a>
+                      )}
+                    </div>
                   </div>
 
                   {/* RIGHT COLUMN: Detailed Information & Breakdown */}
