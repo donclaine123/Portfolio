@@ -1,0 +1,50 @@
+# Mark Alexis Batis — Full Stack Developer & Software Engineer
+
+> Official machine-readable context file for AI agents, LLMs, and search engines (per llmstxt.org specifications).
+
+## Summary
+Mark Alexis Batis is a Full Stack Developer and Computer Science Graduate based in Metro Manila, Philippines. He specializes in designing and building scalable web applications, real-time tracking systems, and mobile-first products with clean architecture, high visual polish, and robust backend engineering.
+
+- **Portfolio URL**: https://markalexisbatis.vercel.app
+- **GitHub**: https://github.com/donclaine123
+- **LinkedIn**: https://www.linkedin.com/in/mark-alexis-batis-4061b128a/
+- **Email**: markalexisbatis@gmail.com
+- **Location**: Caloocan, Metro Manila, Philippines
+
+## Core Technical Competencies
+- **Frontend Architecture**: React 19, Next.js (App Router), TypeScript, Tailwind CSS, Framer Motion, HTML5/CSS3.
+- **Backend Systems & APIs**: Node.js, Express.js, PHP, Laravel 11, RESTful APIs, WebSockets, Socket.IO.
+- **Databases & Data Modeling**: PostgreSQL, Supabase, MySQL, SQLite, Prisma ORM, Redis.
+- **Mobile Development**: React Native, Expo, SQLite, Android App Widgets.
+- **Infrastructure & Tools**: Git, GitHub, Vercel, Render, Stripe Payments, Postman, Linux.
+
+## Featured Projects & Case Studies
+
+### 1. Pocket — Penny Journal
+- **Category**: Mobile Finance Application
+- **Platform**: Android (React Native, Expo, SQLite)
+- **Key Features**: 100% offline-first privacy, local SQLite transactions, Android home screen quick-logging widgets, zero tracking, sub-3-second expense entry.
+- **Repository**: https://github.com/donclaine123/pocket
+
+### 2. Ecart — Modern E-Commerce Platform
+- **Category**: Full-Stack E-Commerce System
+- **Platform**: Web (React 19, Next.js, Laravel 11 REST API, Supabase PostgreSQL, Stripe)
+- **Key Features**: Product catalogs, real-time inventory management, secure Stripe checkout flow, transactional notifications, granular role-based authentication.
+- **Live Demo**: https://myecart.vercel.app
+
+### 3. QR Code Attendance & Monitoring System
+- **Category**: Real-Time Enterprise Operations Platform
+- **Platform**: Web (Node.js, Express, Socket.IO, PostgreSQL, Vanilla JS)
+- **Key Features**: Instant QR badge scanning for college faculty, live attendance dashboards via WebSockets, automated time-in/time-out logging, audit logs.
+- **Live Demo**: https://employeeattendance.me
+
+### 4. EazyAttend Student Attendance System
+- **Category**: Educational Technology Platform
+- **Platform**: Web (PHP, MySQL, Bootstrap, JavaScript)
+- **Key Features**: Session-based student attendance verification, encrypted authentication, section management, exportable attendance reports.
+- **Live Demo**: https://eazyattend.netlify.app/
+
+## Contact & Collaboration
+Mark Alexis Batis is available for full-time software engineering roles, contract development, and select freelance projects.
+- **Email**: markalexisbatis@gmail.com
+- **Website**: https://markalexisbatis.vercel.app

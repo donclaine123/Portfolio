@@ -27,7 +27,9 @@ export default function Preloader({ onComplete }: PreloaderProps) {
       className="fixed inset-0 bg-[#FAF8F5] z-[9999] flex flex-col items-center justify-center pointer-events-auto"
     >
       <div className="relative overflow-hidden px-6 py-2">
-        <motion.h1
+        <motion.div
+          role="status"
+          aria-label="Mark Alexis Batis"
           initial={{ y: "100%" }}
           animate={{ 
             y: 0,
@@ -40,7 +42,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
           className="font-serif text-3xl md:text-5xl lg:text-6xl font-black text-stone-900 tracking-tight text-center"
         >
           Mark Alexis Batis
-        </motion.h1>
+        </motion.div>
       </div>
 
       {/* Thin editorial aesthetic line */}

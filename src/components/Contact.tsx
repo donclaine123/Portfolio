@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { Mail, MapPin, Send, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
+import { Mail, MapPin, Send, CheckCircle2, AlertCircle, Loader2, Copy, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Magnetic from "@/components/Magnetic";
 
 const GithubIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -36,6 +37,15 @@ export default function Contact() {
 
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [statusMessage, setStatusMessage] = useState("");
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigator.clipboard.writeText("markalexisbatis@gmail.com");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({
@@ -88,104 +98,169 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-16 sm:py-24 px-4 sm:px-6 relative bg-white overflow-hidden">
-      <div className="max-w-6xl mx-auto">
+    <section id="contact" className="py-20 sm:py-28 px-4 sm:px-6 relative bg-[#F3F6F7] dark:bg-[#0B0E14] overflow-hidden transition-colors duration-500">
+      {/* Giant Editorial Backdrop Watermark matching Hero layout */}
+      <div 
+        aria-hidden="true" 
+        className="absolute inset-x-0 top-8 sm:top-12 flex justify-center pointer-events-none select-none z-0 overflow-hidden"
+      >
+        <span className="text-[13vw] font-sans font-black uppercase tracking-tighter bg-gradient-to-b from-zinc-950/[0.12] via-zinc-950/[0.04] to-transparent dark:from-white/[0.14] dark:via-white/[0.05] dark:to-transparent bg-clip-text text-transparent leading-none whitespace-nowrap select-none">
+          COLLABORATE
+        </span>
+      </div>
+
+      <div className="relative z-10 max-w-6xl mx-auto">
         
-        {/* Header */}
-        <div className="mb-10 sm:mb-14 md:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-sans font-bold text-black tracking-tight mb-3 sm:mb-4">
-            Get in Touch
+        {/* Header with Cursive Accent */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.6 }}
+          className="mb-10 sm:mb-14 md:mb-16"
+        >
+          {/* Cursive Accent matching Hero */}
+          <div className="font-[family-name:var(--font-caveat)] text-2xl sm:text-3xl font-bold text-[#B83824] dark:text-[#FF5A36] mb-1 origin-bottom-left -rotate-2 inline-block">
+            have an ambitious roadmap?
+          </div>
+          <span className="text-[11px] font-black uppercase tracking-[0.25em] text-[#B83824] dark:text-[#FF5A36] mb-2 block">
+            05 // INITIATE COLLABORATION
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-sans font-black text-black dark:text-white tracking-tight mb-3 sm:mb-4">
+            Let&apos;s Build Together.
           </h2>
-          <p className="text-gray-600 text-sm sm:text-base">
-            Available for freelance, internships, and exciting projects. Let's create something great.
+          <p className="text-zinc-600 dark:text-zinc-400 text-sm sm:text-base max-w-xl">
+            Available for full-stack engineering roles, software contracts, and high-impact digital systems. Let&apos;s discuss your roadmap.
           </p>
-        </div>
+        </motion.div>
 
         {/* Two Column Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-8 items-start">
           
           {/* Left Column: Contact Info Cards & Socials */}
-          <div className="lg:col-span-5 flex flex-col gap-3 sm:gap-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.15 }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-5 flex flex-col gap-3 sm:gap-4"
+          >
             
-            {/* Email Card */}
-            <motion.a 
-              href="mailto:markalexisbatis@gmail.com"
+            {/* Email Card with 1-Click Copy */}
+            <motion.div 
               whileHover={{ y: -2 }}
-              className="flex items-center gap-4 p-4 sm:p-5 md:p-6 bg-white border border-gray-200 rounded-2xl shadow-sm hover:border-gray-300 transition-all block"
+              className="group flex items-center justify-between p-4 sm:p-5 md:p-6 bg-white dark:bg-zinc-900/70 border-2 border-zinc-900/10 dark:border-zinc-800 shadow-[0_4px_24px_rgb(0,0,0,0.03)] dark:shadow-[0_4px_24px_rgb(0,0,0,0.4)] rounded-2xl hover:border-[#B83824]/40 dark:hover:border-[#FF5A36]/40 transition-all"
             >
-              <div className="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center rounded-full border border-gray-200 text-gray-700 shrink-0">
-                <Mail className="w-5 h-5" />
-              </div>
-              <div className="flex flex-col min-w-0">
-                <span className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-0.5">
-                  EMAIL
-                </span>
-                <span className="text-sm sm:text-base font-semibold text-black truncate">
-                  markalexisbatis@gmail.com
-                </span>
-              </div>
-            </motion.a>
+              <a 
+                href="mailto:markalexisbatis@gmail.com"
+                className="flex items-center gap-4 min-w-0 flex-1 mr-2"
+                aria-label="Send email to markalexisbatis@gmail.com"
+              >
+                <div className="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 shrink-0 group-hover:border-[#B83824] dark:group-hover:border-[#FF5A36] group-hover:text-[#B83824] dark:group-hover:text-[#FF5A36] transition-colors">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <div className="flex flex-col min-w-0">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#B83824] dark:text-[#FF5A36] mb-0.5">
+                    EMAIL
+                  </span>
+                  <span className="text-sm sm:text-base font-semibold text-black dark:text-white truncate">
+                    markalexisbatis@gmail.com
+                  </span>
+                </div>
+              </a>
+
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                aria-label="Copy email address"
+                className="p-2 sm:px-3 sm:py-1.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 hover:text-[#B83824] dark:hover:text-[#FF5A36] hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-all flex items-center gap-1.5 text-xs font-medium shrink-0 cursor-pointer shadow-2xs active:scale-95"
+              >
+                {copied ? (
+                  <>
+                    <Check className="w-3.5 h-3.5 text-emerald-500" />
+                    <span className="text-emerald-500 font-semibold hidden sm:inline">Copied!</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-3.5 h-3.5" />
+                    <span className="hidden sm:inline">Copy</span>
+                  </>
+                )}
+              </button>
+            </motion.div>
 
             {/* Location Card */}
             <motion.div 
               whileHover={{ y: -2 }}
-              className="flex items-center gap-4 p-4 sm:p-5 md:p-6 bg-white border border-gray-200 rounded-2xl shadow-sm"
+              className="flex items-center gap-4 p-4 sm:p-5 md:p-6 bg-white dark:bg-zinc-900/70 border-2 border-zinc-900/10 dark:border-zinc-800 shadow-[0_4px_24px_rgb(0,0,0,0.03)] dark:shadow-[0_4px_24px_rgb(0,0,0,0.4)] rounded-2xl"
             >
-              <div className="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center rounded-full border border-gray-200 text-gray-700 shrink-0">
-                <MapPin className="w-5 h-5" />
+              <div className="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 shrink-0">
+                <MapPin className="w-5 h-5 text-[#B83824] dark:text-[#FF5A36]" />
               </div>
               <div className="flex flex-col">
-                <span className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-0.5">
+                <span className="text-xs font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mb-0.5">
                   LOCATION
                 </span>
-                <span className="text-sm sm:text-base font-semibold text-black">
+                <span className="text-sm sm:text-base font-semibold text-black dark:text-white">
                   Philippines
                 </span>
               </div>
             </motion.div>
 
-            {/* Social Icons */}
+            {/* Social Icons with Magnetic Hover */}
             <div className="flex items-center gap-3 mt-2 sm:mt-4">
-              <a 
-                href="https://github.com/donclaine123" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                aria-label="GitHub"
-                className="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center rounded-full border border-gray-200 text-black hover:bg-gray-50 hover:border-gray-300 transition-all"
-              >
-                <GithubIcon className="w-5 h-5" />
-              </a>
-              <a 
-                href="https://www.linkedin.com/in/mark-alexis-batis-4061b128a/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                aria-label="LinkedIn"
-                className="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center rounded-full border border-gray-200 text-black hover:bg-gray-50 hover:border-gray-300 transition-all"
-              >
-                <LinkedinIcon className="w-5 h-5" />
-              </a>
-              <a 
-                href="https://www.facebook.com/micky.arkal/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                aria-label="Facebook"
-                className="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center rounded-full border border-gray-200 text-black hover:bg-gray-50 hover:border-gray-300 transition-all"
-              >
-                <FacebookIcon className="w-5 h-5" />
-              </a>
+              <Magnetic strength={0.35}>
+                <a 
+                  href="https://github.com/donclaine123" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  aria-label="GitHub Profile"
+                  className="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 text-black dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all cursor-pointer"
+                >
+                  <GithubIcon className="w-5 h-5" />
+                </a>
+              </Magnetic>
+              <Magnetic strength={0.35}>
+                <a 
+                  href="https://www.linkedin.com/in/mark-alexis-batis-4061b128a/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  aria-label="LinkedIn Profile"
+                  className="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 text-black dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all cursor-pointer"
+                >
+                  <LinkedinIcon className="w-5 h-5" />
+                </a>
+              </Magnetic>
+              <Magnetic strength={0.35}>
+                <a 
+                  href="https://www.facebook.com/micky.arkal/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  aria-label="Facebook Profile"
+                  className="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 text-black dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all cursor-pointer"
+                >
+                  <FacebookIcon className="w-5 h-5" />
+                </a>
+              </Magnetic>
             </div>
 
-          </div>
+          </motion.div>
 
           {/* Right Column: Contact Form */}
-          <div className="lg:col-span-7">
-            <div className="bg-[#f8f9fa] rounded-2xl sm:rounded-3xl p-5 sm:p-7 md:p-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.15 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="lg:col-span-7"
+          >
+            <div className="bg-white dark:bg-zinc-900/70 border-2 border-zinc-900/10 dark:border-zinc-800 shadow-[0_4px_24px_rgb(0,0,0,0.03)] dark:shadow-[0_4px_24px_rgb(0,0,0,0.4)] rounded-2xl sm:rounded-3xl p-5 sm:p-7 md:p-10">
               <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Name Input */}
                   <div className="flex flex-col gap-2">
-                    <label htmlFor="name" className="text-xs font-bold uppercase tracking-wider text-gray-600">
+                    <label htmlFor="name" className="text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
                       YOUR NAME *
                     </label>
                     <input 
@@ -195,13 +270,13 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="John Doe"
-                      className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3.5 text-base text-black placeholder:text-gray-400 outline-none focus:border-gray-400 transition-colors shadow-sm"
+                      className="w-full bg-zinc-50/80 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base text-black dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-600 outline-none focus:border-[#B83824] dark:focus:border-[#FF5A36] transition-colors shadow-2xs"
                     />
                   </div>
 
                   {/* Email Input */}
                   <div className="flex flex-col gap-2">
-                    <label htmlFor="email" className="text-xs font-bold uppercase tracking-wider text-gray-600">
+                    <label htmlFor="email" className="text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
                       YOUR EMAIL *
                     </label>
                     <input 
@@ -211,14 +286,14 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="john@example.com"
-                      className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3.5 text-base text-black placeholder:text-gray-400 outline-none focus:border-gray-400 transition-colors shadow-sm"
+                      className="w-full bg-zinc-50/80 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base text-black dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-600 outline-none focus:border-[#B83824] dark:focus:border-[#FF5A36] transition-colors shadow-2xs"
                     />
                   </div>
                 </div>
 
                 {/* Subject Input */}
                 <div className="flex flex-col gap-2">
-                  <label htmlFor="subject" className="text-xs font-bold uppercase tracking-wider text-gray-600">
+                  <label htmlFor="subject" className="text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
                     SUBJECT
                   </label>
                   <input 
@@ -227,13 +302,13 @@ export default function Contact() {
                     value={formData.subject}
                     onChange={handleChange}
                     placeholder="Project Inquiry / Job Opportunity"
-                    className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3.5 text-base text-black placeholder:text-gray-400 outline-none focus:border-gray-400 transition-colors shadow-sm"
+                    className="w-full bg-zinc-50/80 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base text-black dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-600 outline-none focus:border-[#B83824] dark:focus:border-[#FF5A36] transition-colors shadow-2xs"
                   />
                 </div>
 
                 {/* Message Input */}
                 <div className="flex flex-col gap-2">
-                  <label htmlFor="message" className="text-xs font-bold uppercase tracking-wider text-gray-600">
+                  <label htmlFor="message" className="text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
                     MESSAGE *
                   </label>
                   <textarea 
@@ -243,7 +318,7 @@ export default function Contact() {
                     value={formData.message}
                     onChange={handleChange}
                     placeholder="Tell me about your project, timeline, or idea..."
-                    className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3.5 text-base text-black placeholder:text-gray-400 outline-none focus:border-gray-400 transition-colors shadow-sm resize-none"
+                    className="w-full bg-zinc-50/80 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base text-black dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-600 outline-none focus:border-[#B83824] dark:focus:border-[#FF5A36] transition-colors shadow-2xs resize-none"
                   ></textarea>
                 </div>
 
@@ -254,9 +329,9 @@ export default function Contact() {
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
-                      className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm flex items-center gap-3"
+                      className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-sm flex items-center gap-3"
                     >
-                      <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                      <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
                       <span>{statusMessage}</span>
                     </motion.div>
                   )}
@@ -266,36 +341,38 @@ export default function Contact() {
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
-                      className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-800 text-sm flex items-center gap-3"
+                      className="p-4 rounded-xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 text-red-800 dark:text-red-300 text-sm flex items-center gap-3"
                     >
-                      <AlertCircle className="w-5 h-5 text-red-600 shrink-0" />
+                      <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 shrink-0" />
                       <span>{statusMessage}</span>
                     </motion.div>
                   )}
                 </AnimatePresence>
 
-                {/* Submit Button */}
-                <button 
-                  type="submit"
-                  disabled={status === "loading"}
-                  className="mt-2 w-full bg-black text-white rounded-xl py-4 flex items-center justify-center gap-2 font-semibold text-sm hover:bg-gray-900 transition-colors group disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
-                >
-                  {status === "loading" ? (
-                    <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>Sending...</span>
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-4 h-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
-                      <span>Send Message</span>
-                    </>
-                  )}
-                </button>
+                {/* Submit Button with Magnetic Hover */}
+                <Magnetic strength={0.15} className="w-full mt-2">
+                  <button 
+                    type="submit"
+                    disabled={status === "loading"}
+                    className="w-full bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 rounded-xl py-4 flex items-center justify-center gap-2 font-bold text-sm hover:bg-[#B83824] dark:hover:bg-[#FF5A36] dark:hover:text-white transition-all shadow-md active:scale-95 group disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
+                  >
+                    {status === "loading" ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Sending...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+                        <span>Send Message</span>
+                      </>
+                    )}
+                  </button>
+                </Magnetic>
 
               </form>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>

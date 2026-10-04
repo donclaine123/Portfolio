@@ -1,20 +1,46 @@
+# robots.txt for https://markalexisbatis.vercel.app
+# Generated with claude-seo agentic best practices
+
 User-agent: *
 Allow: /
 
-# Explicitly welcome major search engine crawlers
+# Traditional Search Engine Crawlers
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
 Allow: /
 
-User-agent: Bravebot
+User-agent: Applebot
 Allow: /
 
 User-agent: DuckDuckBot
 Allow: /
 
-User-agent: Applebot
+User-agent: Bravebot
+Allow: /
+
+# AI Search & Answer Engine Crawlers (Allowed for Citability & GEO)
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# Model Grounding & Reference Crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
 Allow: /
 
 Host: https://markalexisbatis.vercel.app

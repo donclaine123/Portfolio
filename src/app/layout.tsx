@@ -7,20 +7,19 @@ import "./globals.css";
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  display: "swap",
 });
 
 const playfair = Playfair_Display({
   variable: "--font-serif",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-  style: ["normal", "italic"],
+  display: "swap",
 });
 
 const caveat = Caveat({
   variable: "--font-caveat",
   subsets: ["latin"],
-  weight: ["400", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -59,10 +58,11 @@ export const metadata: Metadata = {
     siteName: "Mark Alexis Batis Portfolio",
     images: [
       {
-        url: "/mark.png",
+        url: "https://markalexisbatis.vercel.app/mypicture.png",
         width: 800,
         height: 800,
-        alt: "Mark Alexis Batis",
+        type: "image/png",
+        alt: "Mark Alexis Batis — Full Stack Developer",
       },
     ],
   },
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     title: "Mark Alexis Batis | Full Stack Developer & Software Engineer",
     description:
       "Explore projects, technical skills, and experience of Mark Alexis Batis — Full Stack Developer & Computer Science Graduate.",
-    images: ["/mark.png"],
+    images: ["https://markalexisbatis.vercel.app/mypicture.png"],
   },
   robots: {
     index: true,
@@ -85,9 +85,12 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/mark.png",
-    shortcut: "/mark.png",
-    apple: "/mark.png",
+    icon: [
+      { url: "/icon.png?v=2" },
+      { url: "/mypicture.png?v=2" },
+    ],
+    shortcut: "/icon.png?v=2",
+    apple: "/icon.png?v=2",
   },
   verification: {
     google: "google5bcf944fd2d85eac",
@@ -104,10 +107,24 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "WebSite",
+      "@id": "https://markalexisbatis.vercel.app/#website",
+      url: "https://markalexisbatis.vercel.app",
+      name: "Mark Alexis Batis Portfolio",
+      description: "Official portfolio of Mark Alexis Batis — Full Stack Developer & Software Engineer.",
+      publisher: {
+        "@id": "https://markalexisbatis.vercel.app/#person",
+      },
+      inLanguage: "en-US",
+    },
+    {
       "@type": "ProfilePage",
       "@id": "https://markalexisbatis.vercel.app/#webpage",
       url: "https://markalexisbatis.vercel.app",
       name: "Mark Alexis Batis | Full Stack Developer & Software Engineer",
+      isPartOf: {
+        "@id": "https://markalexisbatis.vercel.app/#website",
+      },
       description:
         "Official portfolio and project case studies of Mark Alexis Batis — Full Stack Developer & Computer Science Graduate.",
       mainEntity: {
@@ -120,11 +137,21 @@ const jsonLd = {
       name: "Mark Alexis Batis",
       alternateName: ["donclaine123", "Alexis Batis"],
       url: "https://markalexisbatis.vercel.app",
-      image: "https://markalexisbatis.vercel.app/mark.png",
+      image: "https://markalexisbatis.vercel.app/mypicture.png",
       jobTitle: "Full Stack Developer",
+      hasOccupation: {
+        "@type": "Occupation",
+        name: "Full Stack Developer",
+        occupationLocation: {
+          "@type": "AdministrativeArea",
+          name: "Metro Manila, Philippines",
+        },
+        skills:
+          "React, Next.js, TypeScript, Node.js, Express, Laravel, PostgreSQL, MySQL, Socket.IO, React Native, Mobile Development",
+      },
       worksFor: {
         "@type": "Organization",
-        name: "Independent",
+        name: "Independent / Freelance",
       },
       alumniOf: {
         "@type": "EducationalOrganization",
@@ -174,6 +201,11 @@ const jsonLd = {
       description:
         "Minimalist, distraction-free mobile expense tracker with 100% offline-first privacy, Android home screen widgets, and 3-second transaction logging.",
       url: "https://github.com/donclaine123/pocket",
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+      },
       author: {
         "@id": "https://markalexisbatis.vercel.app/#person",
       },
@@ -186,6 +218,11 @@ const jsonLd = {
       description:
         "Modern full-stack e-commerce web application with React 19, Laravel 11 REST API, Supabase PostgreSQL, and Stripe payment processing.",
       url: "https://myecart.vercel.app",
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+      },
       author: {
         "@id": "https://markalexisbatis.vercel.app/#person",
       },
@@ -198,6 +235,11 @@ const jsonLd = {
       description:
         "Real-time faculty attendance tracking ecosystem powered by Socket.IO, Node.js, and PostgreSQL.",
       url: "https://employeeattendance.me",
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+      },
       author: {
         "@id": "https://markalexisbatis.vercel.app/#person",
       },
@@ -210,6 +252,11 @@ const jsonLd = {
       description:
         "Automated student presence verification web application with encrypted session-based authentication.",
       url: "https://eazyattend.netlify.app/",
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+      },
       author: {
         "@id": "https://markalexisbatis.vercel.app/#person",
       },
@@ -234,8 +281,8 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-full bg-white text-black font-sans antialiased selection:bg-black/10 selection:text-black">
-        <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
+      <body className="min-h-full bg-white dark:bg-[#090a0f] text-zinc-900 dark:text-zinc-100 font-sans antialiased selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black transition-colors duration-300">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <LenisProvider>
             {children}
           </LenisProvider>

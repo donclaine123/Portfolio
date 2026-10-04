@@ -267,20 +267,34 @@ export default function Projects() {
   ];
 
   return (
-    <section id="projects" className="py-16 sm:py-24 bg-white">
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
+    <section id="projects" className="py-20 sm:py-28 relative bg-[#F3F6F7] dark:bg-[#0B0E14] overflow-hidden transition-colors duration-500">
+      {/* Giant Editorial Backdrop Watermark matching Hero layout */}
+      <div 
+        aria-hidden="true" 
+        className="absolute inset-x-0 top-8 sm:top-12 flex justify-center pointer-events-none select-none z-0 overflow-hidden"
+      >
+        <span className="text-[13vw] font-sans font-black uppercase tracking-tighter bg-gradient-to-b from-zinc-950/[0.12] via-zinc-950/[0.04] to-transparent dark:from-white/[0.14] dark:via-white/[0.05] dark:to-transparent bg-clip-text text-transparent leading-none whitespace-nowrap select-none">
+          PROJECTS
+        </span>
+      </div>
+
+      <div className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.6 }}
           className="text-center mb-12 sm:mb-16"
         >
-          <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-2 block">
-            PORTFOLIO SHOWCASE
+          {/* Cursive Accent matching Hero */}
+          <div className="font-[family-name:var(--font-caveat)] text-2xl sm:text-3xl font-bold text-[#B83824] dark:text-[#FF5A36] mb-1 origin-bottom-left -rotate-2 inline-block">
+            selected productions & systems
+          </div>
+          <span className="text-[11px] font-black uppercase tracking-[0.25em] text-[#B83824] dark:text-[#FF5A36] mb-2 block">
+            03 // FEATURED ENGINEERING WORK
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-sans font-black text-black tracking-tight">
-            Featured Projects
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-sans font-black text-black dark:text-white tracking-tight">
+            Production Systems & Case Studies
           </h2>
         </motion.div>
 
@@ -290,14 +304,14 @@ export default function Projects() {
               key={cs.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: false, amount: 0.15 }}
               transition={{ duration: 0.6, delay: idx * 0.1 }}
               className="flex flex-col group"
             >
               {/* Project Preview Image / Card Header - Click triggers detailed modal */}
               <div
                 onClick={() => setSelectedProject(cs)}
-                className="relative w-full aspect-[16/10] sm:aspect-[4/3] rounded-2xl sm:rounded-[2rem] mb-5 sm:mb-6 overflow-hidden bg-gray-50 border border-gray-100 shadow-[0_4px_20px_rgb(0,0,0,0.03)] group-hover:shadow-[0_12px_30px_rgb(0,0,0,0.09)] transition-all duration-500 cursor-pointer flex items-center justify-center"
+                className="relative w-full aspect-[16/10] sm:aspect-[4/3] rounded-2xl sm:rounded-[2rem] mb-5 sm:mb-6 overflow-hidden bg-white dark:bg-zinc-900 border-2 border-zinc-900/10 dark:border-zinc-800 shadow-[0_4px_24px_rgb(0,0,0,0.04)] dark:shadow-[0_4px_24px_rgb(0,0,0,0.4)] group-hover:shadow-[0_12px_36px_rgb(0,0,0,0.08)] dark:group-hover:shadow-[0_12px_36px_rgb(0,0,0,0.6)] group-hover:border-[#B83824]/40 dark:group-hover:border-[#FF5A36]/40 transition-all duration-500 cursor-pointer flex items-center justify-center"
                 role="button"
                 tabIndex={0}
                 aria-label={`View detailed case study for ${cs.title}`}
@@ -310,7 +324,7 @@ export default function Projects() {
               >
                 {cs.image ? (
                   cs.isMobile ? (
-                    <div className="relative w-full h-full flex items-center justify-center overflow-hidden bg-[#FAF5EA]">
+                    <div className="relative w-full h-full flex items-center justify-center overflow-hidden bg-[#FAF5EA] dark:bg-[#181614]">
                       {/* Ambient background blur */}
                       <Image
                         src={cs.image}
@@ -324,7 +338,7 @@ export default function Projects() {
                       {/* Floating pill badge on image */}
                       <div className="absolute top-4 left-4 z-10">
                         <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/75 backdrop-blur-md text-white text-[11px] font-semibold tracking-wide shadow-sm">
-                          Click picture for details
+                          Click for Case Study
                         </span>
                       </div>
 
@@ -398,7 +412,7 @@ export default function Projects() {
               {/* Metadata */}
               <div className="flex flex-col flex-1">
                 <div className="flex items-center justify-between mb-2 sm:mb-3">
-                  <span className="text-xs font-bold uppercase tracking-widest text-gray-400 block">
+                  <span className="text-xs font-bold uppercase tracking-widest text-[#B83824] dark:text-[#FF5A36] block">
                     {cs.industry}
                   </span>
                   {cs.detailsLink ? (
@@ -406,7 +420,7 @@ export default function Projects() {
                       href={cs.detailsLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs sm:text-sm font-semibold text-gray-500 hover:text-black transition-colors"
+                      className="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-zinc-700 dark:text-zinc-300 hover:text-[#B83824] dark:hover:text-[#FF5A36] transition-colors"
                       aria-label={`Visit live site for ${cs.title}`}
                     >
                       <span>Visit Live Site</span>
@@ -417,7 +431,7 @@ export default function Projects() {
                       href={cs.downloadLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-emerald-600 hover:text-emerald-700 transition-colors"
+                      className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-emerald-600 dark:text-emerald-400 hover:underline transition-colors"
                       aria-label={`Download APK for ${cs.title}`}
                     >
                       <Download className="w-3.5 h-3.5" />
@@ -429,7 +443,7 @@ export default function Projects() {
                       href={cs.githubLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs sm:text-sm font-semibold text-gray-500 hover:text-black transition-colors"
+                      className="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-zinc-700 dark:text-zinc-300 hover:text-[#B83824] dark:hover:text-[#FF5A36] transition-colors"
                       aria-label={`View GitHub repository for ${cs.title}`}
                     >
                       <span>GitHub</span>
@@ -440,12 +454,12 @@ export default function Projects() {
 
                 <h3
                   onClick={() => setSelectedProject(cs)}
-                  className="text-xl sm:text-2xl md:text-3xl font-bold text-black tracking-tight mb-3 sm:mb-4 hover:text-gray-600 transition-colors cursor-pointer"
+                  className="text-xl sm:text-2xl md:text-3xl font-bold text-black dark:text-white tracking-tight mb-3 sm:mb-4 hover:text-[#B83824] dark:hover:text-[#FF5A36] transition-colors cursor-pointer"
                 >
                   {cs.title}
                 </h3>
 
-                <p className="text-gray-600 text-sm sm:text-base leading-[1.75] mb-5 sm:mb-6 line-clamp-3">
+                <p className="text-zinc-600 dark:text-zinc-300 text-sm sm:text-base leading-[1.75] mb-5 sm:mb-6 line-clamp-3">
                   {cs.description}
                 </p>
 
@@ -454,7 +468,7 @@ export default function Projects() {
                   {cs.metrics.map((m, i) => (
                     <span
                       key={i}
-                      className="px-3.5 sm:px-4 py-1.5 rounded-full bg-gray-50 text-gray-700 text-xs sm:text-sm font-semibold border border-gray-100"
+                      className="px-3.5 sm:px-4 py-1.5 rounded-full bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 text-xs sm:text-sm font-semibold border border-zinc-200/80 dark:border-zinc-800 hover:border-[#B83824] dark:hover:border-[#FF5A36] transition-colors shadow-2xs select-none"
                     >
                       {m.value}
                     </span>
@@ -487,15 +501,15 @@ export default function Projects() {
                 onClick={(e) => e.stopPropagation()}
                 onWheel={(e) => e.stopPropagation()}
                 onTouchMove={(e) => e.stopPropagation()}
-                className="bg-white rounded-2xl sm:rounded-[2rem] overflow-hidden w-full max-w-5xl lg:max-w-6xl h-[94vh] md:h-[86vh] flex flex-col shadow-2xl border border-gray-100 overscroll-contain"
+                className="bg-white dark:bg-[#0c0d12] rounded-2xl sm:rounded-[2rem] overflow-hidden w-full max-w-5xl lg:max-w-6xl h-[94vh] md:h-[86vh] flex flex-col shadow-2xl border border-gray-100 dark:border-zinc-800 overscroll-contain transition-colors duration-300"
               >
                 {/* Modal Top Bar */}
-                <div className="flex items-center justify-between px-4 sm:px-6 md:px-8 py-3.5 sm:py-5 border-b border-gray-100 bg-white shrink-0">
+                <div className="flex items-center justify-between px-4 sm:px-6 md:px-8 py-3.5 sm:py-5 border-b border-gray-100 dark:border-zinc-800 bg-white dark:bg-[#0c0d12] shrink-0">
                   <div className="flex flex-col min-w-0 pr-3 sm:pr-4">
-                    <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-gray-400">
+                    <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-gray-400 dark:text-zinc-500">
                       Project Case Study
                     </span>
-                    <h3 className="font-bold text-base sm:text-xl md:text-2xl text-black truncate">
+                    <h3 className="font-bold text-base sm:text-xl md:text-2xl text-black dark:text-white truncate">
                       {selectedProject.title}
                     </h3>
                   </div>
@@ -506,7 +520,7 @@ export default function Projects() {
                         href={selectedProject.detailsLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 bg-black text-white rounded-full text-xs sm:text-sm font-semibold hover:bg-gray-800 transition-colors shadow-sm"
+                        className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 bg-black text-white dark:bg-white dark:text-black rounded-full text-xs sm:text-sm font-semibold hover:bg-gray-800 dark:hover:bg-zinc-200 transition-colors shadow-sm"
                       >
                         <span>Live Site</span>
                         <ExternalLink className="w-3.5 h-3.5" />
@@ -528,7 +542,7 @@ export default function Projects() {
                         href={selectedProject.githubLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-900 text-white rounded-full text-xs sm:text-sm font-semibold hover:bg-black transition-colors shadow-sm"
+                        className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-900 dark:bg-zinc-800 text-white rounded-full text-xs sm:text-sm font-semibold hover:bg-black dark:hover:bg-zinc-700 border border-transparent dark:border-zinc-700 transition-colors shadow-sm"
                       >
                         <span>GitHub</span>
                         <ExternalLink className="w-3.5 h-3.5" />
@@ -537,7 +551,7 @@ export default function Projects() {
                     <button
                       onClick={() => setSelectedProject(null)}
                       aria-label="Close project details"
-                      className="p-1.5 sm:p-2 text-gray-400 hover:text-black hover:bg-gray-100 rounded-full transition-colors cursor-pointer"
+                      className="p-1.5 sm:p-2 text-gray-400 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-full transition-colors cursor-pointer"
                     >
                       <X className="w-5 h-5" />
                     </button>
@@ -549,7 +563,7 @@ export default function Projects() {
                   {/* LEFT COLUMN: Picture, Meta & Quick Links */}
                   <div 
                     data-lenis-prevent
-                    className="w-full md:w-[42%] lg:w-[40%] flex flex-col gap-4 sm:gap-5 p-4 sm:p-6 md:p-8 bg-gray-50/70 border-b md:border-b-0 md:border-r border-gray-100 md:overflow-y-auto shrink-0 md:h-full overscroll-contain"
+                    className="w-full md:w-[42%] lg:w-[40%] flex flex-col gap-4 sm:gap-5 p-4 sm:p-6 md:p-8 bg-gray-50/70 dark:bg-zinc-950/40 border-b md:border-b-0 md:border-r border-gray-100 dark:border-zinc-800 md:overflow-y-auto shrink-0 md:h-full overscroll-contain"
                   >
                     {/* Project Picture with Zoom On Click (if available) */}
                     {selectedProject.image && (
@@ -557,9 +571,9 @@ export default function Projects() {
                         onClick={() => setIsImageZoomed(true)}
                         className={`relative w-full ${
                           selectedProject.isMobile
-                            ? "h-[320px] sm:h-[380px] md:h-[400px] flex items-center justify-center bg-[#FAF5EA]"
-                            : "aspect-[16/10] sm:aspect-[4/3] bg-gray-100"
-                        } rounded-xl sm:rounded-2xl overflow-hidden border border-gray-200 shadow-sm shrink-0 cursor-zoom-in group/zoom`}
+                            ? "h-[320px] sm:h-[380px] md:h-[400px] flex items-center justify-center bg-[#FAF5EA] dark:bg-[#181614]"
+                            : "aspect-[16/10] sm:aspect-[4/3] bg-gray-100 dark:bg-zinc-800"
+                        } rounded-xl sm:rounded-2xl overflow-hidden border border-gray-200 dark:border-zinc-700/80 shadow-sm shrink-0 cursor-zoom-in group/zoom`}
                         role="button"
                         tabIndex={0}
                         aria-label="Click to zoom picture"
@@ -617,33 +631,33 @@ export default function Projects() {
 
                     {/* Metadata Strip */}
                     <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-1 gap-2 sm:gap-2.5">
-                      <div className="flex items-center gap-3 p-2.5 sm:p-3 bg-white rounded-xl border border-gray-100 shadow-xs">
-                        <div className="w-8 h-8 rounded-lg bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-700 shrink-0">
+                      <div className="flex items-center gap-3 p-2.5 sm:p-3 bg-white dark:bg-zinc-900/80 rounded-xl border border-gray-100 dark:border-zinc-800 shadow-xs">
+                        <div className="w-8 h-8 rounded-lg bg-gray-50 dark:bg-zinc-800 border border-gray-100 dark:border-zinc-700/60 flex items-center justify-center text-gray-700 dark:text-zinc-300 shrink-0">
                           <Briefcase className="w-4 h-4" />
                         </div>
                         <div className="flex flex-col min-w-0">
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Role</span>
-                          <span className="text-xs sm:text-sm font-bold text-black truncate">{selectedProject.role}</span>
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-zinc-500">Role</span>
+                          <span className="text-xs sm:text-sm font-bold text-black dark:text-white truncate">{selectedProject.role}</span>
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-3 p-2.5 sm:p-3 bg-white rounded-xl border border-gray-100 shadow-xs">
-                        <div className="w-8 h-8 rounded-lg bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-700 shrink-0">
+                      <div className="flex items-center gap-3 p-2.5 sm:p-3 bg-white dark:bg-zinc-900/80 rounded-xl border border-gray-100 dark:border-zinc-800 shadow-xs">
+                        <div className="w-8 h-8 rounded-lg bg-gray-50 dark:bg-zinc-800 border border-gray-100 dark:border-zinc-700/60 flex items-center justify-center text-gray-700 dark:text-zinc-300 shrink-0">
                           <Calendar className="w-4 h-4" />
                         </div>
                         <div className="flex flex-col min-w-0">
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Timeline</span>
-                          <span className="text-xs sm:text-sm font-bold text-black truncate">{selectedProject.timeline}</span>
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-zinc-500">Timeline</span>
+                          <span className="text-xs sm:text-sm font-bold text-black dark:text-white truncate">{selectedProject.timeline}</span>
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-3 p-2.5 sm:p-3 bg-white rounded-xl border border-gray-100 shadow-xs">
-                        <div className="w-8 h-8 rounded-lg bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-700 shrink-0">
+                      <div className="flex items-center gap-3 p-2.5 sm:p-3 bg-white dark:bg-zinc-900/80 rounded-xl border border-gray-100 dark:border-zinc-800 shadow-xs">
+                        <div className="w-8 h-8 rounded-lg bg-gray-50 dark:bg-zinc-800 border border-gray-100 dark:border-zinc-700/60 flex items-center justify-center text-gray-700 dark:text-zinc-300 shrink-0">
                           <Layers className="w-4 h-4" />
                         </div>
                         <div className="flex flex-col min-w-0">
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Context</span>
-                          <span className="text-xs sm:text-sm font-bold text-black truncate">{selectedProject.company}</span>
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-zinc-500">Context</span>
+                          <span className="text-xs sm:text-sm font-bold text-black dark:text-white truncate">{selectedProject.company}</span>
                         </div>
                       </div>
                     </div>
@@ -655,7 +669,7 @@ export default function Projects() {
                           href={selectedProject.detailsLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-black text-white font-bold text-xs sm:text-sm hover:bg-gray-800 transition-all shadow-sm shrink-0"
+                          className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-black text-white dark:bg-white dark:text-black font-bold text-xs sm:text-sm hover:bg-gray-800 dark:hover:bg-zinc-200 transition-all shadow-sm shrink-0"
                         >
                           <span>Visit Live Site</span>
                           <ExternalLink className="w-4 h-4" />
@@ -678,7 +692,7 @@ export default function Projects() {
                           href={selectedProject.githubLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-gray-900 text-white font-bold text-xs sm:text-sm hover:bg-black transition-all shadow-sm shrink-0"
+                          className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-gray-900 dark:bg-zinc-800 text-white font-bold text-xs sm:text-sm hover:bg-black dark:hover:bg-zinc-700 border border-transparent dark:border-zinc-700 transition-all shadow-sm shrink-0"
                         >
                           <span>View on GitHub</span>
                           <ExternalLink className="w-4 h-4" />
@@ -690,14 +704,14 @@ export default function Projects() {
                   {/* RIGHT COLUMN: Detailed Information & Breakdown */}
                   <div 
                     data-lenis-prevent
-                    className="w-full md:w-[58%] lg:w-[60%] flex-1 flex flex-col p-4 sm:p-6 md:p-8 space-y-6 md:overflow-y-auto md:h-full overscroll-contain"
+                    className="w-full md:w-[58%] lg:w-[60%] flex-1 flex flex-col p-4 sm:p-6 md:p-8 space-y-6 md:overflow-y-auto md:h-full overscroll-contain bg-white dark:bg-[#0c0d12]"
                   >
                     {/* Overview */}
                     <div>
-                      <span className="text-xs font-bold uppercase tracking-wider text-gray-400 block mb-1">
+                      <span className="text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-zinc-500 block mb-1">
                         {selectedProject.industry}
                       </span>
-                      <p className="text-gray-700 text-sm sm:text-base leading-[1.8] font-normal">
+                      <p className="text-gray-700 dark:text-zinc-300 text-sm sm:text-base leading-[1.8] font-normal">
                         {selectedProject.description}
                       </p>
                     </div>
@@ -705,20 +719,20 @@ export default function Projects() {
                     {/* Problem & Solution (if available) */}
                     {selectedProject.problem && selectedProject.solution && (
                       <div className="space-y-3 sm:space-y-4">
-                        <div className="p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-white border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.02)]">
-                          <h4 className="text-xs font-bold uppercase tracking-widest text-red-500 mb-1.5 sm:mb-2">
+                        <div className="p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-white dark:bg-zinc-900/60 border border-gray-100 dark:border-zinc-800 shadow-[0_2px_12px_rgb(0,0,0,0.02)]">
+                          <h4 className="text-xs font-bold uppercase tracking-widest text-red-500 dark:text-red-400 mb-1.5 sm:mb-2">
                             The Challenge & Problem
                           </h4>
-                          <p className="text-gray-700 text-xs sm:text-sm leading-[1.8] font-normal">
+                          <p className="text-gray-700 dark:text-zinc-300 text-xs sm:text-sm leading-[1.8] font-normal">
                             {selectedProject.problem}
                           </p>
                         </div>
 
-                        <div className="p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-white border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.02)]">
-                          <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-600 mb-1.5 sm:mb-2">
+                        <div className="p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-white dark:bg-zinc-900/60 border border-gray-100 dark:border-zinc-800 shadow-[0_2px_12px_rgb(0,0,0,0.02)]">
+                          <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-1.5 sm:mb-2">
                             The Technical Solution
                           </h4>
-                          <p className="text-gray-700 text-xs sm:text-sm leading-[1.8] font-normal">
+                          <p className="text-gray-700 dark:text-zinc-300 text-xs sm:text-sm leading-[1.8] font-normal">
                             {selectedProject.solution}
                           </p>
                         </div>
@@ -728,19 +742,19 @@ export default function Projects() {
                     {/* Project Highlights & Architecture (if available) */}
                     {selectedProject.highlights && selectedProject.highlights.length > 0 && (
                       <div>
-                        <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-black mb-3">
+                        <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-black dark:text-white mb-3">
                           Project Highlights & Architecture
                         </h4>
                         <div className="grid grid-cols-1 gap-2.5 sm:gap-3">
                           {selectedProject.highlights.map((item, i) => (
                             <div
                               key={i}
-                              className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-gray-50/80 border border-gray-100 flex flex-col gap-1.5 transition-all hover:bg-gray-50"
+                              className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-gray-50/80 dark:bg-zinc-900/50 border border-gray-100 dark:border-zinc-800 flex flex-col gap-1.5 transition-all hover:bg-gray-50 dark:hover:bg-zinc-900/80"
                             >
-                              <span className="text-xs sm:text-sm font-bold text-black flex items-center gap-1.5">
+                              <span className="text-xs sm:text-sm font-bold text-black dark:text-white flex items-center gap-1.5">
                                 {item.title}
                               </span>
-                              <p className="text-gray-600 text-xs sm:text-sm leading-[1.7] font-normal">
+                              <p className="text-gray-600 dark:text-zinc-400 text-xs sm:text-sm leading-[1.7] font-normal">
                                 {item.description}
                               </p>
                             </div>
@@ -752,17 +766,17 @@ export default function Projects() {
                     {/* Key Technical Features (for projects without highlights) */}
                     {(!selectedProject.highlights || selectedProject.highlights.length === 0) && selectedProject.features && selectedProject.features.length > 0 && (
                       <div>
-                        <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-black mb-3">
+                        <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-black dark:text-white mb-3">
                           Key Technical Features & Architecture
                         </h4>
                         <div className="grid grid-cols-1 gap-2 sm:gap-2.5">
                           {selectedProject.features.map((feature, i) => (
                             <div
                               key={i}
-                              className="flex items-start gap-2.5 sm:gap-3 p-3 rounded-xl bg-gray-50/80 border border-gray-100"
+                              className="flex items-start gap-2.5 sm:gap-3 p-3 rounded-xl bg-gray-50/80 dark:bg-zinc-900/50 border border-gray-100 dark:border-zinc-800"
                             >
-                              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                              <span className="text-gray-800 text-xs sm:text-sm leading-relaxed font-medium">
+                              <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+                              <span className="text-gray-800 dark:text-zinc-200 text-xs sm:text-sm leading-relaxed font-medium">
                                 {feature}
                               </span>
                             </div>
@@ -774,20 +788,20 @@ export default function Projects() {
                     {/* Technology Stack / Grouped Stack */}
                     {selectedProject.techStack && selectedProject.techStack.length > 0 ? (
                       <div>
-                        <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-black mb-2.5 sm:mb-3">
+                        <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-black dark:text-white mb-2.5 sm:mb-3">
                           Tech Stack
                         </h4>
                         <div className="space-y-2.5">
                           {selectedProject.techStack.map((group, idx) => (
-                            <div key={idx} className="p-3.5 rounded-xl bg-gray-50/80 border border-gray-100">
-                              <span className="text-[11px] font-bold uppercase tracking-wider text-gray-500 block mb-2">
+                            <div key={idx} className="p-3.5 rounded-xl bg-gray-50/80 dark:bg-zinc-900/50 border border-gray-100 dark:border-zinc-800">
+                              <span className="text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-zinc-400 block mb-2">
                                 {group.category}
                               </span>
                               <div className="flex flex-wrap gap-1.5">
                                 {group.skills.map((skill, sIdx) => (
                                   <span
                                     key={sIdx}
-                                    className="px-2.5 py-1 rounded-md bg-white border border-gray-200 text-xs font-semibold text-gray-800 shadow-2xs"
+                                    className="px-2.5 py-1 rounded-md bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 text-xs font-semibold text-gray-800 dark:text-zinc-200 shadow-2xs"
                                   >
                                     {skill}
                                   </span>
@@ -799,17 +813,17 @@ export default function Projects() {
                       </div>
                     ) : (
                       <div>
-                        <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-black mb-2.5 sm:mb-3">
+                        <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-black dark:text-white mb-2.5 sm:mb-3">
                           Technologies & Environment
                         </h4>
                         <div className="flex flex-wrap gap-2">
                           {selectedProject.metrics.map((m, i) => (
                             <div
                               key={i}
-                              className="px-3 py-1.5 rounded-lg bg-gray-50 border border-gray-200 flex flex-col"
+                              className="px-3 py-1.5 rounded-lg bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 flex flex-col"
                             >
-                              <span className="text-xs font-bold text-black">{m.value}</span>
-                              <span className="text-[10px] text-gray-500">{m.label}</span>
+                              <span className="text-xs font-bold text-black dark:text-white">{m.value}</span>
+                              <span className="text-[10px] text-gray-500 dark:text-zinc-400">{m.label}</span>
                             </div>
                           ))}
                         </div>
@@ -819,16 +833,16 @@ export default function Projects() {
                 </div>
 
                 {/* Modal Footer */}
-                <div className="px-4 sm:px-6 md:px-8 py-3 sm:py-3.5 border-t border-gray-100 bg-gray-50/50 flex items-center justify-between shrink-0">
-                  <span className="text-[11px] sm:text-xs text-gray-500">
-                    Press <kbd className="px-1.5 sm:px-2 py-0.5 bg-white border border-gray-200 rounded text-[10px] font-semibold">ESC</kbd> to close
+                <div className="px-4 sm:px-6 md:px-8 py-3 sm:py-3.5 border-t border-gray-100 dark:border-zinc-800 bg-gray-50/50 dark:bg-[#0c0d12] flex items-center justify-between shrink-0">
+                  <span className="text-[11px] sm:text-xs text-gray-500 dark:text-zinc-400">
+                    Press <kbd className="px-1.5 sm:px-2 py-0.5 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded text-[10px] font-semibold text-zinc-700 dark:text-zinc-300">ESC</kbd> to close
                   </span>
                   <button
                     onClick={() => {
                       setIsImageZoomed(false);
                       setSelectedProject(null);
                     }}
-                    className="px-4 sm:px-5 py-1.5 sm:py-2 rounded-full border border-gray-200 bg-white text-black font-semibold text-xs sm:text-sm hover:bg-gray-100 transition-colors cursor-pointer"
+                    className="px-4 sm:px-5 py-1.5 sm:py-2 rounded-full border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-black dark:text-white font-semibold text-xs sm:text-sm hover:bg-gray-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer"
                   >
                     Close
                   </button>
