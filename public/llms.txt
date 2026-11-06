@@ -36,7 +36,7 @@ Mark Alexis Batis is a Full Stack Developer and Computer Science Graduate based 
 - **Category**: Real-Time Enterprise Operations Platform
 - **Platform**: Web (Node.js, Express, Socket.IO, PostgreSQL, Vanilla JS)
 - **Key Features**: Instant QR badge scanning for college faculty, live attendance dashboards via WebSockets, automated time-in/time-out logging, audit logs.
-- **Live Demo**: https://employeeattendance.vercel.app
+- **Live Demo**: https://employeattendance.vercel.app
 
 ### 4. EazyAttend Student Attendance System
 - **Category**: Educational Technology Platform

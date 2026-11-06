@@ -230,7 +230,7 @@ export default function Projects() {
       ],
       image: `${basePath}/facultyattendance.png`,
       status: "available",
-      detailsLink: "https://employeeattendance.vercel.app",
+      detailsLink: "https://employeattendance.vercel.app",
       metrics: [
         { value: "Node.js", label: "Backend Environment" },
         { value: "Socket.IO", label: "Real-Time Updates" },
