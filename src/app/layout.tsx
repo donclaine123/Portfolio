@@ -234,7 +234,7 @@ const jsonLd = {
       applicationCategory: "BusinessApplication",
       description:
         "Real-time faculty attendance tracking ecosystem powered by Socket.IO, Node.js, and PostgreSQL.",
-      url: "https://employeeattendance.me",
+      url: "https://employeeattendance.vercel.app",
       offers: {
         "@type": "Offer",
         price: "0",
